@@ -2,6 +2,7 @@
 # uses Ghostscript to convert PDF to PNG at good quality
 # Michael Hirsch
 
+echo "if you're trying to extract images, use pdfimages program instead"
 inpdf=$1
 firstpg=$2
 lastpg=$3
