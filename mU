@@ -1,0 +1,20 @@
+#!/bin/bash
+# Michael Hirsch
+# for connecting to BU research grid shares
+# requires being on BU network or via VPN
+#take care of hung up connections
+uU
+user= #your kerberos username
+# user parameters
+sshfsHost=engineering-grid.bu.edu
+sshfsDir=/ad/eng/research/
+
+#now connect
+echo mounting AD U
+sshfs -o sshfs_debug \
+      -o follow_symlinks \
+      -o PubKeyAuthentication=no \
+      $user@"$sshfsHost":"$sshfsDir" \
+      ~/U
+
+# dont use -C from office, it's half the speed due to CPU load of server!
