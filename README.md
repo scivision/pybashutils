@@ -1,3 +1,5 @@
+[![Health](https://landscape.io/github/scienceopen/bash-utils/master/landscape.png)](https://landscape.io/github/scienceopen/bash-utils/master)
+
 bash-utils
 ==========
 
