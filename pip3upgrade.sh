@@ -6,7 +6,7 @@
 
 #pyside is too enormous to bother with in pip
 
-pkgs="cython cairocffi pyside numpy six matplotlib scipy oct2py h5py pandas astropy sphinx pyflakes pylint sympy pep8 spyder moviepy ipython[notebook] pyserial pyephem scikit-image"
+pkgs="cython cairocffi numpy six matplotlib scipy oct2py h5py pandas astropy sphinx pyflakes pylint sympy pep8 spyder moviepy ipython[notebook] pyserial pyephem scikit-image"
 p="$pkgs rope_py3k"
 sudo pip3 install --upgrade $p
 p="$pkgs rope"
