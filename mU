@@ -4,7 +4,7 @@
 # requires being on BU network or via VPN
 #take care of hung up connections
 uU
-user= #your kerberos username
+user=$1 #your kerberos username
 # user parameters
 sshfsHost=engineering-grid.bu.edu
 sshfsDir=/ad/eng/research/

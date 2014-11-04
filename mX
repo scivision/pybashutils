@@ -2,7 +2,7 @@
 # Michael Hirsch
 # for connecting to your BU personal network drive
 # requires being on BU network or via VPN
-user= #your BU kerberos login
+user=$1 #your BU kerberos login
 #take care of hung up connections
 uX
 
