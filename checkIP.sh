@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# Michael Hirsch
+# sends an email when an IP address change is detected (use with cron)
 YOUREMAIL="you@youremail"
 
 IPADDRESS=$(hostname -I | tr -d [:space:])
