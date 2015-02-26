@@ -6,7 +6,7 @@ echo "if you're trying to extract images, use pdfimages program instead"
 inpdf=$1
 firstpg=$2
 lastpg=$3
-dpi=300 #user specified
+dpi=600 #user specified
 
 #basestem=$(basename $inpdf .pdf) #no directory
 instem=${inpdf%.*} #no $ on inpdf
