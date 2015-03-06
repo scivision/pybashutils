@@ -1,4 +1,9 @@
 #!/bin/bash
+# designed to work in Linux and Windows(Cygwin). Should(!) work on Mac, if not let me know.
+# assumes install directory:
+#   Windows: c:\Anaconda
+#   Linux/Mac: ~/anaconda
+# Michael Hirsch
 
 #detect operating system
 case "$(uname -s)" in
