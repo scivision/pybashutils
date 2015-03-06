@@ -3,6 +3,8 @@
 # assumes install directory:
 #   Windows: c:\Anaconda
 #   Linux/Mac: ~/anaconda
+# I use this to keep lots of PCs in my GNU Parallel HPCC updated with the same Python modules.
+# if you don't like this auto-install behavior, change "install --yes" to "update --yes"
 # Michael Hirsch
 
 #detect operating system
