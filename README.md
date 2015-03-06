@@ -1,11 +1,13 @@
 bash-utils
 ==========
 
-checkIP: Sends you an email automatically if your IP address changes
+```cupd```: update conda packages (well, the ones I use)
 
-getIP: gets your public IP address (not the internal NAT address)
+```checkIP```: Sends you an email automatically if your IP address changes
 
-findtext: find text inside files matching pattern.
+```getIP```: gets your public IP address (not the internal NAT address)
+
+```findtext```: find text inside files matching pattern.
 
 mx: mount network share example using SSHFS
 
