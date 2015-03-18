@@ -17,7 +17,7 @@ for d in anaconda miniconda anaconda3 miniconda3
  do
  if [[ -d $hd/$d ]]; then
   cdir=$hd/$d/$sd
-  $cdir/conda install --yes matplotlib scipy numpy astropy pandas xlrd h5py scikit-image bokeh python conda ipython ephem pip numba spyder ipython-notebook paramiko #mkl
+  $cdir/conda install --yes matplotlib scipy numpy astropy pandas xlrd h5py scikit-image bokeh python conda ipython ephem pip numba spyder ipython-notebook paramiko pytables #mkl
   $cdir/pip install --upgrade tifffile jedi
   # now let's try opencv, which isn't always available
   # if $cdir/conda install --yes opencv; then :
