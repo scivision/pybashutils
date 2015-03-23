@@ -1,3 +1,3 @@
 #!/bin/bash
 
-du -hs * | sort -rh | head --lines=20
+du -hs "$1"* | sort -rh | head --lines=20
