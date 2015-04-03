@@ -9,4 +9,7 @@ else
  exit 0
 fi
 
-find $fDir -regextype posix-egrep -type f -iregex '.*\.(avi|mov|mp4|mpg|mpeg|webm|ogv|mkv|wmv)$'
+#FIXME doesn't actually check to see that result is a valid video and not just a
+#       PNG with the .avi extension
+
+find $fDir -regextype posix-egrep -type f -iregex '.*\.(avi|mov|mp4|mpg|mpeg|webm|ogv|mkv|wmv)$' 2>/dev/null
