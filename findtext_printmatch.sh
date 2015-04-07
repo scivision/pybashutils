@@ -8,9 +8,9 @@ srchText=$1
 fDir="."
 fntmp="*" ;;
 2)
-fDir=$1
-srchText=$2
-fntmp="*" ;;
+fDir="."
+srchText=$1
+fntmp=$2 ;;
 3)
 fDir=$1
 srchText=$2
