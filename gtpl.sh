@@ -2,7 +2,13 @@
 # for a root directory $rdir, assumes all subdirectories are Git repos
 # and pulls to the current branch
 
-rdir=~/code/
+case "$(uname -s)" in
+    CYGWIN*) hd=$SYSTEMDRIVE;  ;;
+    *)       hd=$HOME; ;;
+esac
+
+
+rdir=$hd/code
 
 for cdr in $(find $rdir -mindepth 1 -maxdepth 1 -type d); do
        echo "pulling $cdr"

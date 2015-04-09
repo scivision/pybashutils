@@ -1,6 +1,15 @@
 #!/bin/bash
+# pushes all git directories under $rdir with changes.
+# Michael Hirsch
 
-rdir=~/code/
+case "$(uname -s)" in
+    CYGWIN*) hd=$SYSTEMDRIVE;  ;;
+    *)       hd=$HOME; ;;
+esac
+
+
+rdir=$hd/code
+
 cdir=$(pwd)
 for cdr in $(find $rdir -mindepth 1 -maxdepth 1 -type d); do
 cd $cdr
