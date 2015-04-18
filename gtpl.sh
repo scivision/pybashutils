@@ -9,9 +9,10 @@ esac
 
 
 rdir=$hd/code
+ldir=$(find -H $rdir -mindepth 1 -maxdepth 1 -type d)
+echo "scanning ${#ldir[@]} directories under $rdir"
 
-for cdr in $(find $rdir -mindepth 1 -maxdepth 1 -type d); do
-       echo "pulling $cdr"
-       (cd "$cdr" && exec git pull)
+for cdr in ${ldir[@]}; do
+       cd "$cdr" && git pull || echo "ERROR pulling $cdr"
        sleep 0.$[ ($RANDOM % 1000) ] #so as not to hammer the remote server, delay of 0-1 second
 done
