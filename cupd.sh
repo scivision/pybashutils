@@ -23,11 +23,9 @@ for d in anaconda miniconda anaconda3 miniconda3
   $cdir/pip install --upgrade tifffile
   $cdir/pip install --upgrade oct2py spectral spacepy
 
-  $cdir/pip install --upgrade xray bottleneck cyordereddict 
-  $cdir/pip install --upgrade pydap #python 2.7
-
-  # if $cdir/conda install --yes opencv; then :
-  # fi
-
+  if [[ "${d: -1}" -ne 3 ]]; then #python 2.7
+    $cdir/pip install --upgrade xray bottleneck cyordereddict
+    $cdir/pip install --upgrade pydap #python 2.7
+  fi
  fi
 done
