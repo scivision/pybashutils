@@ -19,7 +19,8 @@ for d in anaconda miniconda anaconda3 miniconda3
  do
  if [[ -d $hd/$d ]]; then
   cdir=$hd/$d/$sd
-  $cdir/conda install --yes matplotlib seaborn scipy numpy astropy pandas xlrd h5py scikit-image bokeh python conda ipython ephem pip numba spyder ipython-notebook paramiko basemap jedi pylint netcdf4 requests plotly #mkl
+  $cdir/conda install --yes matplotlib seaborn scipy numpy astropy pandas xlrd h5py scikit-image bokeh python conda ipython ephem pip numba spyder ipython-notebook paramiko basemap jedi pylint netcdf4 requests#mkl
+  $cdir/pip install --upgrade plotly
   $cdir/pip install --upgrade tifffile
   $cdir/pip install --upgrade oct2py spectral spacepy
 
