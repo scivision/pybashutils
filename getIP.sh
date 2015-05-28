@@ -15,7 +15,7 @@
 url=('https://api.ipify.org' 'http://v4.ident.me' 'http://ipecho.net/plain' 'http://wtfismyip.com/text')
 
 for u in ${url[@]}; do
- if curl -m 4 $u; then echo; break
+ if curl -s -m 4 $u; then echo; break
  fi
 done
 
