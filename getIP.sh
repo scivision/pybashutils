@@ -1,6 +1,7 @@
 #!/bin/bash
-#gets public IP address and displays in Terminal
+# gets public IP address and displays in Terminal
 # Michael Hirsch
+# https://scivision.co
 
 url=('v4.ident.me' 'ipecho.net/plain' 'wtfismyip.com/text')
 
