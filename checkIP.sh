@@ -1,9 +1,10 @@
 #!/bin/bash
 # Michael Hirsch
 # sends an email when an IP address change is detected (use with cron)
-# http://blogs.bu.edu/mhirsch/2013/11/get-email-upon-change-of-ip-address/
+# https://scivision.co/get-email-upon-change-of-ip-address/
 YOUREMAIL="you@youremail"
 
+#-------- program below -------------
 IPADDRESS=$(hostname -I | tr -d [:space:])
 OldIP=$(<~/.current_ip)
 
