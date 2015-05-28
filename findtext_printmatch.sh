@@ -23,4 +23,4 @@ esac
 
 # dont use -execdir, or you wont see which directory the found files are in!
 find $fDir -type f -name "$fntmp" -size -$maxFileSize \
-    -exec grep --ignore-case "$srchText" {} +
+    -exec grep -n --ignore-case "$srchText" {} +
