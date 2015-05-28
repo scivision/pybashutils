@@ -3,7 +3,7 @@
 # Michael Hirsch
 # https://scivision.co
 
-url=('v4.ident.me' 'ipecho.net/plain' 'wtfismyip.com/text')
+url=('https://api.ipify.org' 'http://v4.ident.me' 'http://ipecho.net/plain' 'http://wtfismyip.com/text')
 
 for u in ${url[@]}; do
  if curl -m 4 $u; then echo; break
