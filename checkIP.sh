@@ -5,10 +5,11 @@
 YOUREMAIL="you@youremail"
 
 #-------- program below -------------
-IPADDRESS=$(hostname -I | tr -d [:space:])
+#IPADDRESS=$(hostname -I | tr -d [:space:]) #doesn't give public IP if youre on NAT
+CurIP=$(getIP.sh) #gives public IP
 OldIP=$(<~/.current_ip)
 
-if [[ ${IPADDRESS} != ${OldIP} ]]; then
-echo "Your new IP address is ${IPADDRESS} (old address was ${OldIP} )" | mail -s "IP address change" $YOUREMAIL
-echo ${IPADDRESS} > ~/.current_ip
+if [[ ${CurIP} != ${OldIP} ]]; then
+echo "Your new IP address is ${CurIP} (old address was ${OldIP} )" | mail -s "IP address change" $YOUREMAIL
+echo ${CurIP} > ~/.current_ip
 fi
