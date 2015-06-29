@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/scienceopen/pybashutils.svg)](https://travis-ci.org/scienceopen/pybashutils)
+[![Coverage Status](https://coveralls.io/repos/scienceopen/pybashutils/badge.svg)](https://coveralls.io/r/scienceopen/pybashutils)
 
 bash-utils
 ==========
