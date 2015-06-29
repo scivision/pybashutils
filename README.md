@@ -22,7 +22,7 @@ Installation:
 (1) download the code
 ```
 cd ~
-git clone -depth 1 https://github.com/scienceopen/pybashutils.git
+git clone --depth 1 https://github.com/scienceopen/pybashutils.git
 ```
 (2) add the scripts to your Path:
 ```
