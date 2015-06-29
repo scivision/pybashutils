@@ -2,6 +2,11 @@
 # Michael Hirsch
 # for connecting to BU research grid shares
 # requires being on BU network or via VPN
+
+#be sure username was specified
+[[ $# -eq 1 ]] || { echo "you must specify your BU username e.g.   mU jdoe"; exit 1; }
+
+
 #take care of hung up connections
 uU
 user=$1 #your kerberos username
