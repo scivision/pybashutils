@@ -2,6 +2,10 @@
 # Michael Hirsch
 # for connecting to your BU personal network drive
 # requires being on BU network or via VPN
+
+#be sure username was specified
+[[ $# -eq 1 ]] || { echo "you must specify your BU username e.g.   mU jdoe"; ex$
+
 user=$1 #your BU kerberos login
 #take care of hung up connections
 uX
