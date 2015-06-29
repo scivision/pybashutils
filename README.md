@@ -53,4 +53,14 @@ and your network drive is available as ~/U
 ```
 uU
 ```
-Note: if you have any files open (like say a spreadsheet on the ~/U drive), ~/U will stay connected until you close that file(s).
+#####Note: 
+if you have any files open (like say a spreadsheet on the ~/U drive), ~/U will stay connected until you close that file(s).
+
+
+Notes:
+------
+If you get a "sshfs: command not found" error, you need to install sshfs, with a command like:
+```
+sudo apt-get install sshfs
+```
+you need "admin" priviledges to install sshfs.
