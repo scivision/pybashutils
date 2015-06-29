@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/scienceopen/pybashutils.svg)](https://travis-ci.org/scienceopen/pybashutils)
+
 bash-utils
 ==========
 
