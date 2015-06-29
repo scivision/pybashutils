@@ -19,6 +19,8 @@ Collection of Bash scripts I've made that may be generally useful
 
 Installation:
 -------------
+#####This procedure assumes you're on a Linux device
+
 (1) download the code
 ```
 cd ~
