@@ -1,6 +1,6 @@
 #!/bin/bash
 # Michael Hirsch
-# tars (w/o compressing) and moves files per directory
+# tars, XZ, and moves files per directory
 
 : ${2?example: tarcp ~/inDir /media/outDir}
 
@@ -15,9 +15,9 @@ echo "Found directories: ${dlist[*]}"
 
 #main loop
 for din in "${dlist[@]}"; do
-    cout="$OutDir/$din.tar"
+    cout="$OutDir/$din.tar.xz"
     echo "tarring $din to $cout"
-    tar cf "$cout" "$din"
+    XZ_OPT=-0 tar cJf "$cout" "$din"
 done
 
 echo "extract with tar xvf --strip-components=1 *.tar to get rid of . dot directories"
