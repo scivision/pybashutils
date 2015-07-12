@@ -7,7 +7,7 @@
 # curl can't find your certificates. Fix this by:
 #
 # sudo mkdir -p /etc/pki/tls/certs
-# sudo ln /etc/ssl/certs/ca-certificates.crt /etc/pki/tls/certs/ca-bundle.crt
+# sudo ln -s /etc/ssl/certs/ca-certificates.crt /etc/pki/tls/certs/ca-bundle.crt
 #
 # Ref: http://stackoverflow.com/questions/3160909/how-do-i-deal-with-certificates-using-curl-while-trying-to-access-an-https-url
 #
