@@ -15,7 +15,7 @@ echo "Found directories: ${dlist[*]}"
 
 #main loop
 for din in ${dlist[*]}; do
-cout="$OutDir/$din.7z"
+cout="$OutDir/$(basename $din).7z"
 
 # no clobber
 [[ -a $cout ]] && { echo "Skipping $din"; continue; }
