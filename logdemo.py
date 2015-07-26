@@ -4,6 +4,8 @@ If you have a project with multiple .py files, you can log them all to this logg
 import logging
 
 that's it!
+
+By default, logging will log to stderr (on your console)
 """
 
 import logging
