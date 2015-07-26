@@ -6,10 +6,13 @@ import logging
 that's it!
 
 By default, logging will log to stderr (on your console)
+
+
+Ref: http://stackoverflow.com/questions/6290739/python-logging-use-milliseconds-in-time-format
 """
 
 import logging
-logging.basicConfig(format='%(asctime)s %(filename)s/%(funcName)s:%(lineno)d %(message)s', datefmt='%m/%d/%Y %H:%M:%S')
+logging.basicConfig(format='%(asctime)s.%(msecs)03d %(filename)s/%(funcName)s:%(lineno)d %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
 
 def alwaysfail():
