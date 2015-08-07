@@ -18,6 +18,8 @@ for f in ${flist[*]}; do
     latexdiff $old/$b $new/$b > /tmp/$b
 done
 
+echo "output to /tmp"
+
 if [[ -n $main ]]; then
   (
     cd /tmp
