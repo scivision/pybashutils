@@ -22,8 +22,3 @@ for u in ${url[@]}; do
   curl -4 -s -m 2 $u && { echo; break; }
 done
 
-
-
-
-
-
