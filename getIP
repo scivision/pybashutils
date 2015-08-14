@@ -15,7 +15,7 @@
 url=('https://api.ipify.org' 'https://wtfismyip.com/text' 'http://ident.me' 'http://ipecho.net/plain')
 
 for u in ${url[@]}; do
-  curl -6 -s -m 2 $u && { echo; break; }
+  curl -6 -s -m 2 $u && break
 done
 
 for u in ${url[@]}; do
