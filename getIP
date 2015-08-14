@@ -12,11 +12,14 @@
 # Ref: http://stackoverflow.com/questions/3160909/how-do-i-deal-with-certificates-using-curl-while-trying-to-access-an-https-url
 #
 
-url=('https://api.ipify.org' 'http://v4.ident.me' 'http://ipecho.net/plain' 'http://wtfismyip.com/text')
+url=('https://api.ipify.org' 'http://v6.ident.me' 'http://v4.ident.me' 'http://ipecho.net/plain' 'http://wtfismyip.com/text')
 
 for u in ${url[@]}; do
- if curl -s -m 4 $u; then echo; break
- fi
+  curl -6 -s -m 2 $u && { echo; break; }
+done
+
+for u in ${url[@]}; do
+  curl -4 -s -m 2 $u && { echo; break; }
 done
 
 

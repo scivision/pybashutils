@@ -1,0 +1,5 @@
+#!/bin/bash
+
+dvpn
+sudo vpnc-connect $1
+getIP
