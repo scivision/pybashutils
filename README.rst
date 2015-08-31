@@ -1,20 +1,18 @@
 ==========
 bash-utils
 ==========
-Collection of Bash scripts I've made that may be generally useful
+Collection of Bash/Python/Matlab/Octave scripts I've made that may be generally useful
 
 =========   ===========
 function    description
 =========   ===========
 cupd        update conda packages (well, the ones I use)
-
 checkIP     Sends you an email automatically if your IP address changes
-
 getIP       gets your public IP address (not the internal NAT address)
-
 findtext    find text inside files matching pattern.
-
 mx          mount network share example using SSHFS
+memfree.m   Estimates available RAM for Matlab/Octave under Windows, Mac, Linux
+checkRAM.m  check if a proposed N-D array with fit in available RAM (w/o swap)
 =========   ===========
 
 
@@ -55,7 +53,7 @@ and your network drive is available as ~/U
 
     uU
 
-Note 
+Note
 ~~~~
 if you have any files open (like say a spreadsheet on the ~/U drive), ~/U will stay connected until you close that file(s).
 
