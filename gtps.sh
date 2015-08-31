@@ -17,6 +17,7 @@ ldir=$(find -H $rdir -mindepth 1 -maxdepth 1 -type d)
 (
   for cdr in ${ldir[@]}; do
     cd $cdr
+     echo -e "\n ---> $cdr"
     if [[ -n $(git --no-pager diff HEAD 2>/dev/null) ]]; then
       git diff HEAD
       git commit -a && git push
