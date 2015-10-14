@@ -10,11 +10,11 @@ old=$1
 new=$2
 main=$3 #optional for compilation
 
-flist=$(ls $old/*.tex)
+flist=$(find -H $old -maxdepth 1 -type f -name "*.tex")
 
 
 for f in ${flist[*]}; do
-    b=$(basename $f)
+    b=${f##*/}   #$(basename $f)
     latexdiff $old/$b $new/$b > /tmp/$b
 done
 
