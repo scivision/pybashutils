@@ -22,5 +22,11 @@ ldir=$(find -H $rdir -mindepth 1 -maxdepth 1 -type d)
       git diff HEAD
       git commit -a && git push
     fi
+
+    untrac=$(git ls-files -o -d --exclude-standard)
+    if [[ -n $untrac ]]; then
+        echo $untrac
+        exit 1
+    fi
   done
 )
