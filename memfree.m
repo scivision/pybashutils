@@ -16,15 +16,23 @@
 
 function freebytes = memfree()
 
-if ispc  % for Cygwin, isunix=true, ispc=false
-    freebytes = memorywindows();
-elseif ismac % BSD
-    freebytes = memorymac(); % we did not handle Macs yet (request if you want)
-else %isunix && ~ismac
-    freebytes = memoryunix();
-end
+try
+    [err,freebytes]=system('python -c "import psutil; print(psutil.virtual_memory().available)"');
+    if ~err
+        freebytes=str2double(freebytes);
+        disp([num2str(freebytes/1e9,'%0.2f'),' Gbyte available RAM via python psutil'])
+    end
+catch
+    if ispc  % for Cygwin, isunix=true, ispc=false
+        freebytes = memorywindows();
+    elseif ismac % BSD
+        freebytes = memorymac(); % we did not handle Macs yet (request if you want)
+    else %isunix && ~ismac
+        freebytes = memoryunix();
+    end %if
+    disp([num2str(freebytes/1e9,'%0.2f'),' Gbyte available RAM via Matlab fallback'])
+end %try
 
-disp([num2str(freebytes/1e9,'%0.2f'),' Gbyte available RAM'])
 
 if ~nargout,clear,end
 end %function
