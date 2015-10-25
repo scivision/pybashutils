@@ -30,15 +30,19 @@ if ~nargout,clear,end
 end %function
 
 function freebytes = memoryunix()
+%% free + buffers + cached
 [~,msg] = unix('free -mb | awk "NR==2"');
 
 mems = cell2mat(textscan(msg,'%*s %f %f %f %f %f %f','delimiter',' ','collectoutput',true,'multipleDelimsAsOne',true));
+
 freebytes = mems(1,3)+mems(1,5)+mems(1,6);
 
 end %function
 
 function freebytes = memorymac()
-% looks like we could awk vm_stat to get it
+%% inactive + free
+% TODO: looks like we could awk vm_stat to get it
+%  "Pages inactive"   "Pages free"
 freebytes=[];
 
 end %function
