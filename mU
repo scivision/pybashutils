@@ -12,7 +12,7 @@ uU
 user=$1 #your kerberos username
 # user parameters
 sshfsHost=engineering-grid.bu.edu
-sshfsDir=/ad/eng/research/
+sshfsDir=/ad/eng/research/eng_research_irs
 
 #now connect
 echo mounting AD U
