@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 empty_file.py
 makes empty file(s)
@@ -13,7 +14,7 @@ def empty_file(flist):
         flist=[flist]
 
     for f in flist:
-       _blank(f)
+       touch(f)
 
 
 def touch(f):
@@ -22,7 +23,7 @@ def touch(f):
     try:
         f.write_text('')
     except FileNotFoundError:
-        f.mkdir(parents=True,exist_ok=True)
+        f.parent.mkdir(parents=True,exist_ok=True)
         f.write_text('')
 
 
