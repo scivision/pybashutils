@@ -30,7 +30,7 @@ def touch(f):
 if __name__ == '__main__':
     from argparse import ArgumentParser
     p = ArgumentParser()
-    p.add_argument('dirs',help='directories to create',nargs='+',default='')
+    p.add_argument('files',help='empty files to create',nargs='+',default='')
     p = p.parse_args()
 
     empty_file(p.dirs)
