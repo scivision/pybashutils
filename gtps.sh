@@ -23,9 +23,12 @@ ldir=$(find -H $rdir -mindepth 1 -maxdepth 1 -type d)
 #      nosetests -v test/test.py
 #    fi
 
-    if [[ -n $(git --no-pager diff HEAD 2>/dev/null) ]] || [[ -n $1 ]]; then
+    if [[ -n $(git --no-pager diff HEAD 2>/dev/null) ]]; then
       git diff HEAD
       git commit -a && git push
+    elif [[ -n $1 ]]; then
+      git commit -a
+      git push
     fi
 
     untrac=$(git ls-files -o -d --exclude-standard)
