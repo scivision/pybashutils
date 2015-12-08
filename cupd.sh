@@ -15,7 +15,7 @@ case "$(uname -s)" in
     *)       hd=$HOME; sd=bin ;;
 esac
 
-for d in anaconda miniconda anaconda3 miniconda3
+for d in anaconda anaconda2 miniconda miniconda2 anaconda3 miniconda3
  do
  if [[ -d $hd/$d ]]; then
   cdir=$hd/$d/$sd
