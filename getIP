@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # gets public IP address and displays in Terminal
 # Michael Hirsch
 # https://scivision.co
