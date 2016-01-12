@@ -29,6 +29,8 @@ ldir=$(find -H $rdir -mindepth 1 -maxdepth 1 -type d)
     elif [[ -n $1 ]]; then
       git commit -a
       git push
+    elif [[ -n $(git log --branches --not --remotes) ]]; then
+      git log && git push
     fi
 
     untrac=$(git ls-files -o -d --exclude-standard)
