@@ -2,6 +2,12 @@
 # Michael Hirsch
 # sends an email when an IP address change is detected (use with cron)
 # https://scivision.co/get-email-upon-change-of-ip-address/
+#
+# prereq:
+# -------
+# sudo apt-get install sendmail
+# echo "PATH=$HOME/pybashutils:$PATH" >> $HOME/.bashrc
+#
 YOUREMAIL="you@youremail"
 
 #-------- program below -------------
