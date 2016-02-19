@@ -12,7 +12,7 @@ YOUREMAIL="you@youremail"
 
 #-------- program below -------------
 #IPADDRESS=$(hostname -I | tr -d [:space:]) #doesn't give public IP if youre on NAT
-CurIP=$(getIP.sh) #gives public IP
+CurIP=$(getIP) #gives public IP
 OldIP=$(<~/.current_ip)
 
 if [[ ${CurIP} != ${OldIP} ]]; then
