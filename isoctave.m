@@ -1,7 +1,4 @@
 function isoct = isoctave()
-%Michael Hirsch
-% tested with Octave 3.6-4.0 and Matlab R2012a-R2016a
-
 persistent oct;
 
 if isempty(oct)
