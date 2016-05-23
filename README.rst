@@ -1,3 +1,6 @@
+.. image:: https://travis-ci.org/scienceopen/pybashutils.svg?branch=master
+    :target: https://travis-ci.org/scienceopen/pybashutils
+
 ==========
 bash-utils
 ==========
