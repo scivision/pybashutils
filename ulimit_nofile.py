@@ -4,7 +4,8 @@ import resource as res
 def raise_nofile(nofile_atleast=4096,verbose=False):
     """
     sets nofile soft limit to at least 4096, useful for running matlplotlib/seaborn on
-    parallel executing plot generators vs. Ubuntu 16.04 default ulimit -n 1024
+    parallel executing plot generators vs. Ubuntu 16.04 default ulimit -n 1024 or OS X El Captian 256
+    temporary setting extinguishing with Python session.
     """
 #%% (0) what is current ulimit -n setting?
     soft,hard = res.getrlimit(res.RLIMIT_NOFILE)
