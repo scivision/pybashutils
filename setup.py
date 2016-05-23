@@ -1,15 +1,12 @@
 #!/usr/bin/env python
-import os,sys,subprocess
 from setuptools import setup
 
-exepath = os.path.dirname(sys.executable)
-try:
-    subprocess.run([os.path.join(exepath,'conda'),'install','--yes','--file','requirements.txt'])
-except Exception as e:
-    print('tried conda in {}, but you will need to install packages in requirements.txt  {}'.format(exepath,e))
 
 with open('README.rst','r') as f:
 	long_description = f.read()
+
+with open('requirements.txt') as f:
+    required = f.read().splitlines()
 
 setup(name='pythonutils',
       version='0.1',
@@ -17,7 +14,7 @@ setup(name='pythonutils',
 	  long_description=long_description,
 	  author='Michael Hirsch',
 	  url='https://github.com/scienceopen/pybashutils',
-	  install_requires=[],
+	  install_requires=required,
       dependency_links = [],
       packages=['pythonutils'],
 	  )
