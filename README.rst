@@ -21,7 +21,11 @@ memfree.m   Estimates available RAM for Matlab/Octave under Windows, Mac, Linux
 checkRAM.m  check if a proposed N-D array with fit in available RAM (w/o swap)
 =========   ===========
 
+Prereq
+======
+::
 
+    sudo apt-get install libcurl-dev
 
 Installation:
 -------------
