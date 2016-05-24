@@ -1,10 +1,12 @@
 language: python
 
+os:
+    - linux
+    - mac
+
 python:
     - 3.5
 
-sudo: true
-dist: trusty
 
 notifications:
   email: false
