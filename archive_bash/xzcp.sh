@@ -1,7 +1,6 @@
 #!/bin/bash
 # Michael Hirsch
 # tars, XZ, and moves files per directory
-
 : ${2?example: tarcp ~/inDir /media/outDir}
 
 MainDir=$1
