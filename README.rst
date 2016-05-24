@@ -3,6 +3,7 @@
 .. image:: https://coveralls.io/repos/github/scienceopen/pybashutils/badge.svg?branch=master 
     :target: https://coveralls.io/github/scienceopen/pybashutils?branch=master
 
+
 ==========
 bash-utils
 ==========
