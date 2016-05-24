@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-
+"""
+This Python script returns a free network port. 
+You can optionally, on Linux only and requiring sudo specify the network interface.
+"""
 import socket
 
 
