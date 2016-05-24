@@ -1,5 +1,7 @@
 .. image:: https://travis-ci.org/scienceopen/pybashutils.svg?branch=master
     :target: https://travis-ci.org/scienceopen/pybashutils
+.. image:: https://coveralls.io/repos/github/scienceopen/pybashutils/badge.svg?branch=master 
+    :target: https://coveralls.io/github/scienceopen/pybashutils?branch=master
 
 ==========
 bash-utils
