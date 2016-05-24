@@ -18,3 +18,8 @@ def test_ulimit():
     assert soft>=4096
     assert hard>=4096
 
+if __name__ == '__main__':
+
+	test_getip()
+	test_getfreeport()
+	test_ulimit()
