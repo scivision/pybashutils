@@ -12,7 +12,8 @@ Ref: http://stackoverflow.com/questions/6290739/python-logging-use-milliseconds-
 """
 
 import logging
-logging.basicConfig(format='%(asctime)s.%(msecs)03d %(filename)s/%(funcName)s:%(lineno)d %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+logging.basicConfig(format='%(asctime)s.%(msecs)03d %(filename)s/%(funcName)s:%(lineno)d %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S')
 
 
 def alwaysfail():
