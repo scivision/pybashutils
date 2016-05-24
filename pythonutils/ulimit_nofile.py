@@ -20,13 +20,14 @@ def raise_nofile(nofile_atleast=4096):
         print('setting soft & hard ulimit -n {} {}'.format(soft,hard))
         try:
             res.setrlimit(res.RLIMIT_NOFILE,(soft,hard))
-        except res.error:
+        except (ValueError,res.error):
             try:
                hard = soft
                print('trouble with max limit, retrying with soft,hard {},{}'.format(soft,hard))
                res.setrlimit(res.RLIMIT_NOFILE,(soft,hard))
             except Exception:
                print('failed to set ulimit, giving up')
+               soft,hard = res.getrlimit(res.RLIMIT_NOFILE)
 
     return soft,hard
 
