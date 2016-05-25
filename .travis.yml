@@ -1,19 +1,22 @@
-language: python
+notifications:
+  email: false
 
-python:
-    - 3.5
+git:
+  depth: 1
 
 matrix:
   include:
     - os: osx
-#     language: generic
+      language: generic
       osx_image: xcode7.3
       before_install:
-        - brew update
-#      script:
-#        - swift build
+        - wget http://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh -O miniconda.sh
+        - chmod +x miniconda.sh
+        - bash miniconda.sh -b -p $HOME/miniconda
+        - export PATH=$HOME/miniconda/bin:$PATH 
+
     - os: linux
-#      language: generic
+      language: generic
       sudo: required
       dist: trusty
       before_install:
@@ -22,13 +25,9 @@ matrix:
         - bash miniconda.sh -b -p $HOME/miniconda
         - export PATH=$HOME/miniconda/bin:$PATH 
 
-notifications:
-  email: false
-
-git:
-  depth: 1
-
 install:
+    - conda create --yes -n test python=$TRAVIS_PYTHON_VERSION
+    - source activate test
     - pip -q install coveralls
     - python setup.py develop
 
