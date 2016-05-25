@@ -2,7 +2,7 @@ language: python
 
 os:
     - linux
-    - mac
+    - osx
 
 python:
     - 3.5
