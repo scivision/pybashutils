@@ -3,19 +3,17 @@ notifications:
 
 git:
   depth: 1
+  
+env: pyv=3.5
 
 matrix:
   include:
     - os: osx
-        env: 
-          - pyv=3.5
-          - osv=MacOSX
+        env: osv=MacOSX
         osx_image: xcode7.3
 
     - os: linux
-        env: 
-          - pyv=3.5
-          - osv=Linux
+        env: osv=Linux
         sudo: required
         dist: trusty
 
