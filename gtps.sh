@@ -1,6 +1,9 @@
 #!/bin/bash
 # pushes all git directories under $rdir with changes.
-# Michael Hirsch
+#
+# PREREQ: for this to work properly, you must one-time type
+# git config --global core.pager 'less -+F'
+#
 # Notes:
 # if git commit is aborted (empty commit), it returns stderr 1 and git push doesn't execute
 
@@ -19,7 +22,7 @@ ldir=$(find -H $rdir -mindepth 1 -maxdepth 1 -type d)
     cd $cdr
      echo -e "\n ---> $cdr"
 
-#    if [[ -s test/test.py ]]; then
+#    if [[ -s tests/test.py ]]; then
 #      nosetests -v test/test.py
 #    fi
 
