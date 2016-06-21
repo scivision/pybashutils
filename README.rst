@@ -4,9 +4,9 @@
     :target: https://coveralls.io/github/scienceopen/pybashutils?branch=master
 
 
-==========
-bash-utils
-==========
+=================================
+Python-bash-matlab-octave-utils
+=================================
 Collection of Bash/Python/Matlab/Octave scripts I've made that may be generally useful
 
 =========   ===========
@@ -25,7 +25,7 @@ Prereq
 ======
 ::
 
-    sudo apt-get install libcurl-dev
+    sudo apt-get install libcurl-dev sshfs
 
 Installation:
 -------------
@@ -68,10 +68,3 @@ Note
 if you have any files open (like say a spreadsheet on the ~/U drive), ~/U will stay connected until you close that file(s).
 
 
-Notes:
-------
-If you get a "sshfs: command not found" error, you need to install sshfs, with a command like::
-
-    sudo apt-get install sshfs
-
-you need "admin" priviledges to install sshfs.
