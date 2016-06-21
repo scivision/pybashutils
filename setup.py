@@ -9,7 +9,6 @@ with open('requirements.txt') as f:
     required = f.read().splitlines()
 
 setup(name='pythonutils',
-      version='0.1',
 	  description='Python Utilities generally useful',
 	  long_description=long_description,
 	  author='Michael Hirsch',
