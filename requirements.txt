@@ -1,4 +1,4 @@
 setuptools
 nose
-pycurl
+#pycurl
 pathlib2
