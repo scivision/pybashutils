@@ -23,11 +23,11 @@ try
         disp([num2str(freebytes/1e9,'%0.2f'),' Gbyte available RAM via python psutil'])
     end
 catch
-    if ispc  % for Cygwin, isunix=true, ispc=false
+    if ispc  % for Cygwin, isunix=true && ispc=false
         freebytes = memorywindows();
     elseif ismac % BSD
         freebytes = memorymac(); % we did not handle Macs yet (request if you want)
-    else %isunix && ~ismac
+    else %isunix && ~ismac || iscygwin
         freebytes = memoryunix();
     end %if
     disp([num2str(freebytes/1e9,'%0.2f'),' Gbyte available RAM via Matlab fallback'])
