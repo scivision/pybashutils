@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-from six import PY2
-if PY2:
-    from pathlib2 import Path
-else:
+
+try:
     from pathlib import Path
+    Path().expanduser()
+except (ImportError,AttributeError):
+    from pathlib2 import Path

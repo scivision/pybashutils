@@ -3,10 +3,10 @@
 tars (optional compression) and moves files per directory
 """
 import logging
-from pathlib import Path
+from pythonutils import Path
 import tarfile
 
-def tarcp(din,fout,method:str='xz',compresslevel=1):
+def tarcp(din,fout,method='xz',compresslevel=1):
 #%% io setup
     assert isinstance(method,str),'xz bz2 gz or ""'
     din = Path(din).expanduser()

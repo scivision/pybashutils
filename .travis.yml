@@ -28,9 +28,10 @@ install:
     - source activate test
     - pip -q install coveralls
     - python setup.py develop
+    - pip install pycurl
 
 script:
-    - coverage run test/test.py
+    - coverage run tests/test.py
 
 after_success:
     - coveralls
