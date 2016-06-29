@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
-sets core.fileMode=false for git repos
-mostly for Windows, particularly Cygwin
+NOT YET WORKING
+replace gtps.sh with gtps.py
 """
 from pythonutils.ChDir import ChDir
 import os
