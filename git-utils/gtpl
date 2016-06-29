@@ -6,21 +6,22 @@ and pulls to the current branch
 
 from pythonutils.ChDir import ChDir
 from time import sleep
-from subprocess import run
+from subprocess import run,PIPE
 from random import randrange
 #
 from pythonutils.gitcommon import codepath
 
 rdir = codepath()
 
-print('git push for all directories under {}'.format(rdir))
+print('git PULL for all directories under {}'.format(rdir))
 dlist = [x for x in rdir.iterdir() if x.is_dir()]
+
 for d in dlist:
     with ChDir(d):
         print(' --> {}'.format(d))
-        ret = run(['git','pull'])
+        ret = run(['git','pull'],stderr=PIPE,timeout=10)
         
-        if ret.stderr is not None:
+        if ret.returncode != 0:
             print('{} had error git pull {}'.format(d,ret.stderr))
 
         sleep(randrange(10)*.1) # don't hammer the remote server, delay of 0-1 second
