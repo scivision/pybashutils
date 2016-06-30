@@ -39,8 +39,9 @@ def _check_git_ret(cmd,d,dir_topush):
 if __name__ == '__main__':
     rdir = codepath()
     dir_topush = gitpushall(rdir)
-    print('detected changes under {}'.format(rdir))
-    print('\n'.join((str(d) for d in dir_topush)))
+    if dir_topush:
+        print('detected changes under {}'.format(rdir))
+        print('\n'.join((str(d) for d in dir_topush)))
 
 # if [[ -n $(git --no-pager diff HEAD 2>/dev/null) ]]; then
   # git diff HEAD
