@@ -16,13 +16,19 @@ rdir = codepath()
 print('git PULL for all directories under {}'.format(rdir))
 dlist = [x for x in rdir.iterdir() if x.is_dir()]
 
+failed=[]
 for d in dlist:
     with ChDir(d):
         print(' --> {}'.format(d))
-        ret = run(['git','pull'],stderr=PIPE,timeout=10)
-        
+        try:
+            ret = run(['git','pull'],stderr=PIPE,timeout=10)
+        except subprocess.TimeoutExpired:
+            failed.append(d)        
+
         if ret.returncode != 0:
             print('{} had error git pull {}'.format(d,ret.stderr))
 
         sleep(randrange(10)*.1) # don't hammer the remote server, delay of 0-1 second
 
+if failed:
+    print('paths with git pull ERROR: {}'.format('\n'.join(failed)))
