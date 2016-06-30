@@ -13,7 +13,6 @@ from pythonutils.gitcommon import codepath
 
 rdir = codepath()
 
-print('git PULL for all directories under {}'.format(rdir))
 dlist = [x for x in rdir.iterdir() if x.is_dir()]
 
 failed=[]

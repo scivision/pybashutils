@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+from pythonutils.ChDir import ChDir
+from subprocess import run,PIPE
+from random import randrange
+#
+from pythonutils.gitcommon import codepath
+
+rdir = codepath()
+
+dlist = [x for x in rdir.iterdir() if x.is_dir()]
+
+branch=[]
+for d in dlist:
+    with ChDir(d):
+        ret = run(['git','rev-parse','--abbrev-ref','HEAD'],stdout=PIPE)
+
+        if ret.stdout != b"master\n":
+            b = ret.stdout.decode('utf8').rstrip()
+            branch.append((d,b))
+
+if branch:
+    print(branch)

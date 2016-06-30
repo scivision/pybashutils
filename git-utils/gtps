@@ -8,8 +8,6 @@ from subprocess import run,PIPE
 from pythonutils.gitcommon import codepath
 
 def gitpushall(rdir):
-  
-    print('git uncommited work detection for all directories under {}'.format(rdir))
     dlist = [x for x in rdir.iterdir() if x.is_dir()]
     
     dir_topush = []
