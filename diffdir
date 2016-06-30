@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -u
+
+#compares directory trees by filename only -- only differences are reported
+
+diff <(cd $1 && find | sort) <(cd $2 && find | sort)

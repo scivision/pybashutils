@@ -1,0 +1,36 @@
+#!/bin/bash
+# by Michael Hirsch Jan 2013
+set -e #quit on error
+
+i=0
+PreviousNumFiles=0
+green="\e[1;32m"
+normal="\e[00m"
+red="\e[1;31m"
+waitTime=60 #seconds
+maxIter=500
+minutesMonitored=$(($waitTime*$maxIter/60)) #integer math
+
+echo "Press <ctrl>-c to abort monitoring..."
+echo "Monitoring directory:" $1 every $waitTime "seconds for" $minutesMonitored "minutes."
+
+while [ $i -lt $maxIter ]; do
+  i=$(($i+1))
+
+  #explanation of command:
+  # ls -1 (numeral one): list file names only, ONE FILENAME PER LINE
+  # wc -l (ell): count lines in console output
+  CurrentNumFiles=$( ls -1 $1 | wc -l ) #compute number of files in user-specified directory
+  
+  #test to see that number of files is increasing!
+    if [[ $CurrentNumFiles -gt $PreviousNumFiles ]]; then #good
+      	echo -ne  ${green}
+  	else #bad, no new files being written
+  	    echo -ne ${red}
+    fi
+   PreviousNumFiles=$CurrentNumFiles
+    
+  echo -e "$CurrentNumFiles ${normal}files in directory" $1 $(date -u)
+  sleep $waitTime
+done
+
