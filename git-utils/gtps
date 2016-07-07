@@ -2,7 +2,6 @@
 """
 detects uncommitted work/files in all git repos under a directory
 """
-from pythonutils.ChDir import ChDir
 from subprocess import run,PIPE
 #
 from pythonutils.gitcommon import codepath
@@ -24,16 +23,15 @@ def gitpushall(rdir):
 def _check_git_ret(cmd,d,dir_topush):
     assert isinstance(cmd,list)
     assert isinstance(dir_topush,list)
-    
-    with ChDir(d):
-        ret = run(cmd,stdout=PIPE,timeout=10)
-        
+
+    ret = run(cmd,stdout=PIPE,timeout=10, cwd=str(d))
+
     if ret.stdout:
         print(ret.stdout.decode('utf8'))
         dir_topush.append(d)
-        
+
     return dir_topush
-    
+
 if __name__ == '__main__':
     rdir = codepath()
     dir_topush = gitpushall(rdir)

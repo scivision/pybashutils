@@ -2,7 +2,7 @@
 """
 recursively find video files based on extension
 """
-from subprocess import run,PIPE
+from subprocess import run,PIPE,DEVNULL
 
 from argparse import ArgumentParser
 p = ArgumentParser()
@@ -10,8 +10,9 @@ p.add_argument('path',help='root path to start recursive search',nargs='?',defau
 p = p.parse_args()
 
 ret = run(['find',p.path,'-regextype','posix-egrep','-type','f',
-     '-iregex','.*\.(avi|mov|mp4|mpg|mpeg|webm|ogv|mkv|wmv)$'],stdout=PIPE,stderr=PIPE)
+     '-iregex','.*\.(avi|mov|mp4|mpg|mpeg|webm|ogv|mkv|wmv)$'],stdout=PIPE,stderr=DEVNULL)
 
 vids = ret.stdout.decode('utf8').split('\n')
 
-print('\n'.join(vids))
+if vids:
+    print('\n'.join(vids))

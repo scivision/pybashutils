@@ -4,7 +4,6 @@ for a root directory $rdir, assumes all subdirectories are Git repos
 and pulls to the current branch
 """
 
-from pythonutils.ChDir import ChDir
 from time import sleep
 from subprocess import run,PIPE,TimeoutExpired
 from random import randrange
@@ -17,17 +16,16 @@ dlist = [x for x in rdir.iterdir() if x.is_dir()]
 
 failed=[]
 for d in dlist:
-    with ChDir(d):
-        print(' --> {}'.format(d))
-        try:
-            ret = run(['git','pull'],stderr=PIPE,timeout=10)
-        except TimeoutExpired:
-            failed.append(d)
+    print(' --> {}'.format(d))
+    try:
+        ret = run(['git','pull'],stderr=PIPE,timeout=10, cwd=str(d))
+    except TimeoutExpired:
+        failed.append(d)
 
-        if ret.returncode != 0:
-            print('{} had error git pull {}'.format(d,ret.stderr))
+    if ret.returncode != 0:
+        print('{} had error git pull {}'.format(d,ret.stderr))
 
-        sleep(randrange(10)*.1) # don't hammer the remote server, delay of 0-1 second
+    sleep(randrange(10)*.1) # don't hammer the remote server, delay of 0-1 second
 
 if failed:
     print('paths with git pull ERROR: {}'.format('\n'.join(failed)))
