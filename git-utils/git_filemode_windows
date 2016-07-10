@@ -4,7 +4,7 @@ sets core.fileMode=false for git repos
 mostly for Windows, particularly Cygwin
 """
 import os
-from subprocess import run
+from subprocess import call
 #
 from pythonutils.gitcommon import codepath
 
@@ -13,4 +13,4 @@ rdir = codepath()
 print('setting fileMode=false for all directories under {}'.format(rdir))
 dlist = [x for x in rdir.iterdir() if x.is_dir()]
 for d in dlist:
-    run(['git','config','core.filemode','false'],cwd=str(d))
+    call(['git','config','core.filemode','false'],cwd=str(d))

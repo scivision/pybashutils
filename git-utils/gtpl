@@ -23,9 +23,10 @@ for d in dlist:
         failed.append(d)
 
     if ret.returncode != 0:
-        print('{} had error git pull {}'.format(d,ret.stderr))
+        print('{} had error git pull {}'.format(d,ret.stderr.decode('utf8')))
 
     sleep(randrange(10)*.1) # don't hammer the remote server, delay of 0-1 second
 
 if failed:
-    print('paths with git pull ERROR: {}'.format('\n'.join(failed)))
+    print('paths with git pull ERROR:')
+    print('\n'.join(failed))
