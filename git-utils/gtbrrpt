@@ -3,7 +3,7 @@ from subprocess import run,PIPE
 #
 from pythonutils.gitcommon import codepath
 
-rdir = codepath()
+rdir,verbose = codepath()
 
 dlist = [x for x in rdir.iterdir() if x.is_dir()]
 

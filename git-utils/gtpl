@@ -5,7 +5,7 @@ and pulls to the current branch
 """
 
 from time import sleep
-from subprocess import run,PIPE,TimeoutExpired
+import subprocess as S
 from random import randrange
 #
 from pythonutils.gitcommon import codepath
@@ -18,14 +18,12 @@ failed=[]
 for d in dlist:
     print(' --> {}'.format(d))
     try:
-        ret = run(['git','pull'],stderr=PIPE,timeout=10, cwd=str(d))
-    except TimeoutExpired:
+        ret = S.run(['git','pull'],timeout=10, cwd=str(d))
+        ret.check_returncode()
+    except (S.CalledProcessError,S.TimeoutExpired):
         failed.append(d)
-
-    if ret.returncode != 0:
-        print('{} had error git pull {}'.format(d,ret.stderr))
 
     sleep(randrange(10)*.1) # don't hammer the remote server, delay of 0-1 second
 
 if failed:
-    print('paths with git pull ERROR: {}'.format('\n'.join(failed)))
+    print('paths with git pull ERROR: \n{}'.format('\n'.join([str(f) for f in failed])))

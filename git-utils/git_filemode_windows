@@ -8,7 +8,7 @@ from subprocess import run
 #
 from pythonutils.gitcommon import codepath
 
-rdir = codepath()
+rdir,verbose = codepath()
 
 print('setting fileMode=false for all directories under {}'.format(rdir))
 dlist = [x for x in rdir.iterdir() if x.is_dir()]

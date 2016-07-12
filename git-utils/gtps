@@ -2,7 +2,7 @@
 """
 detects uncommitted work/files in all git repos under a directory
 """
-from subprocess import run,PIPE
+import subprocess as S
 #
 from pythonutils.gitcommon import codepath
 
@@ -11,46 +11,24 @@ def gitpushall(rdir):
     
     dir_topush = []
     for d in dlist:
-        #%% check for uncommitted work
-        dir_topush = _check_git_ret(['git','--no-pager','diff','HEAD'],d,dir_topush)
-        #%%  check for uncommitted branches (?)
-        dir_topush = _check_git_ret(['git','log','--branches','--not','--remotes'],d,dir_topush)
-        #%% check for uncommitted files
-        dir_topush = _check_git_ret(['git','ls-files','-o','-d','--exclude-standard'],d,dir_topush)
-
+        for c in (['git','--no-pager','diff','HEAD'], # check for uncommitted work
+                  ['git','log','--branches','--not','--remotes'],     # check for uncommitted branches (?)
+                  ['git','ls-files','-o','-d','--exclude-standard']): # check for uncommitted files
+            try:
+                ret = S.run(c, stdout=S.PIPE, stderr=S.DEVNULL, timeout=10, cwd=str(d))
+                ret.check_returncode()
+                if ret.stdout:
+                    dir_topush.append(d)
+            except S.CalledProcessError as e:
+                print('Error in  {}'.format(d,e.output))
+                break
+            
     return dir_topush
 
-def _check_git_ret(cmd,d,dir_topush):
-    assert isinstance(cmd,list)
-    assert isinstance(dir_topush,list)
-
-    ret = run(cmd,stdout=PIPE,timeout=10, cwd=str(d))
-
-    if ret.stdout:
-        print(ret.stdout.decode('utf8'))
-        dir_topush.append(d)
-
-    return dir_topush
-
+       
 if __name__ == '__main__':
     rdir = codepath()
     dir_topush = gitpushall(rdir)
     if dir_topush:
-        print('detected changes under {}'.format(rdir))
         print('\n'.join((str(d) for d in dir_topush)))
 
-# if [[ -n $(git --no-pager diff HEAD 2>/dev/null) ]]; then
-  # git diff HEAD
-  # git commit -a && git push
-# elif [[ -n $1 ]]; then
-  # git commit -a
-  # git push
-# elif [[ -n $(git log --branches --not --remotes) ]]; then
-  # git log --branches --not --remotes && git push
-# fi
-
-# untrac=$(git ls-files -o -d --exclude-standard)
-# if [[ -n $untrac ]]; then
-    # echo $untrac
-    # exit 1
-# fi
