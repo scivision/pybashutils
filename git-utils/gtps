@@ -8,7 +8,7 @@ from pythonutils.gitcommon import codepath
 
 def gitpushall(rdir):
     dlist = [x for x in rdir.iterdir() if x.is_dir()]
-    
+
     dir_topush = []
     for d in dlist:
         for c in (['git','--no-pager','diff','HEAD'], # check for uncommitted work
