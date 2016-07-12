@@ -22,13 +22,11 @@ def gitpushall(rdir):
             except S.CalledProcessError as e:
                 print('Error in  {}'.format(d,e.output))
                 break
-            
+
     return dir_topush
 
-       
 if __name__ == '__main__':
     rdir = codepath()
     dir_topush = gitpushall(rdir)
     if dir_topush:
         print('\n'.join((str(d) for d in dir_topush)))
-

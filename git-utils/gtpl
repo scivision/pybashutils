@@ -3,7 +3,6 @@
 for a root directory $rdir, assumes all subdirectories are Git repos
 and pulls to the current branch
 """
-
 from time import sleep
 import subprocess as S
 from random import randrange
@@ -18,8 +17,7 @@ failed=[]
 for d in dlist:
     print(' --> {}'.format(d))
     try:
-        ret = S.run(['git','pull'],timeout=10, cwd=str(d))
-        ret.check_returncode()
+        S.check_call(['git','pull'],timeout=10, cwd=str(d))
     except (S.CalledProcessError,S.TimeoutExpired):
         failed.append(d)
 
