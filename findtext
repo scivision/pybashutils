@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+
+MAXSIZE=10e6  #[bytes]
+
+import subprocess
+from pythonutils import Path
+from colorama import init,Fore,Back
+init()
+
+from argparse import ArgumentParser
+p = ArgumentParser(description='searches for TEXT under DIR and echos back filenames')
+p.add_argument('txt',help='text to search for') #required
+p.add_argument('pat',help='glob pattern',nargs='?',default='*')
+p.add_argument('rdir',help='root dir to search',nargs='?',default='.')
+p = p.parse_args()
+
+txt=p.txt
+mat=[]
+
+flist = Path(p.rdir).expanduser().rglob(p.pat)
+for f in flist:
+    if f.is_file() and f.stat().st_size<MAXSIZE:
+        ret = subprocess.run(['grep','--ignore-case','--files-with-matches',
+                              txt, str(f)],
+                             stdout=subprocess.DEVNULL,
+                             timeout=0.5)
+
+        if ret.returncode==0:
+            print(Back.MAGENTA + str(f))
+            mat.append(f)
+            subprocess.run(['grep','--ignore-case','-A1','--color','--line-number',
+                              txt, str(f)],
+                             stderr=subprocess.PIPE,
+                             timeout=0.5)
+
+print('\n'.join(mat))
+
+
