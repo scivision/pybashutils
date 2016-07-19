@@ -15,9 +15,8 @@ def gitpushall(rdir):
                   ['git','log','--branches','--not','--remotes'],     # check for uncommitted branches (?)
                   ['git','ls-files','-o','-d','--exclude-standard']): # check for uncommitted files
             try:
-                ret = S.run(c, stdout=S.PIPE, stderr=S.DEVNULL, timeout=10, cwd=str(d))
-                ret.check_returncode()
-                if ret.stdout:
+                ret = S.check_output(c, stderr=S.DEVNULL, timeout=10, cwd=str(d))
+                if ret:
                     dir_topush.append(d)
             except S.CalledProcessError as e:
                 print('Error in  {}'.format(d,e.output))
