@@ -2,7 +2,6 @@
 
 MAXSIZE=10e6  #[bytes]
 
-import subprocess as S
 from pythonutils import Path
 from colorama import init,Fore,Back
 init()
@@ -20,15 +19,23 @@ mat=[]
 flist = Path(p.rdir).expanduser().rglob(p.pat)
 for f in flist:
     if f.is_file() and f.stat().st_size<MAXSIZE:
-        try:
-            S.check_call(['grep','--ignore-case','--files-with-matches', txt, str(f)])#, timeout=1.)
-        except S.CalledProcessError:
-            continue
+        with f.open('r') as o:
+            here = False
+            matchinglines=[]
+            try:
+                for i,l in enumerate(o):
+                    if not p.txt in l:
+                        continue
+                    matchinglines.append('{}: {}'.format(i,l))
+                    here=True
+            except UnicodeDecodeError as e:
+                print('error on file {}  {}'.format(f,e))
 
-        print(Back.MAGENTA + str(f))
-        mat.append(f)
-        S.call(['grep','--ignore-case','-A1','--color','--line-number', txt, str(f)])#,    timeout=1.)
+        if here:
+            print(Back.MAGENTA + str(f))
+            print(Back.BLACK + '\n'.join(matchinglines))
+            mat.append(f)
 
-print('\n'.join(mat))
+print('\n'.join([str(m) for m in mat]))
 
 
