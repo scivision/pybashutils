@@ -24,7 +24,7 @@ for f in flist:
             matchinglines=[]
             try:
                 for i,l in enumerate(o):
-                    if not p.txt in l:
+                    if not txt in l:
                         continue
                     matchinglines.append('{}: {}'.format(i,l))
                     here=True
