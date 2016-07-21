@@ -1,5 +1,4 @@
 setuptools
 nose
-#pycurl
-pathlib2
 colorama
+pathlib2
