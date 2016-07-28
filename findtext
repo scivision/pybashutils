@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 MAXSIZE=10e6  #[bytes]
-
+import logging
 from pythonutils import Path
+from binaryornot.check import is_binary
+
 from colorama import init,Fore,Back
 init()
 
@@ -11,6 +13,7 @@ p = ArgumentParser(description='searches for TEXT under DIR and echos back filen
 p.add_argument('txt',help='text to search for') #required
 p.add_argument('pat',help='glob pattern',nargs='?',default='*')
 p.add_argument('rdir',help='root dir to search',nargs='?',default='.')
+p.add_argument('-v','--verbose',action='store_true')
 p = p.parse_args()
 
 txt=p.txt
@@ -18,7 +21,7 @@ mat=[]
 
 flist = Path(p.rdir).expanduser().rglob(p.pat)
 for f in flist:
-    if f.is_file() and f.stat().st_size<MAXSIZE:
+    if f.is_file() and not is_binary(str(f)) and f.stat().st_size<MAXSIZE:
         with f.open('r') as o:
             here = False
             matchinglines=[]
@@ -29,7 +32,9 @@ for f in flist:
                     matchinglines.append('{}: {}'.format(i,l))
                     here=True
             except UnicodeDecodeError as e:
-                print('error on file {}  {}'.format(f,e))
+                if p.verbose:
+                    print('error on file {}  {}'.format(f,e))
+                logging.info('error on file {}  {}'.format(f,e))
 
         if here:
             print(Back.MAGENTA + str(f))
