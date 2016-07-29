@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-import resource as res
+try:
+    import resource as res
+except ImportError: #Windows
+    res = None
 
 def raise_nofile(nofile_atleast=4096):
     """
@@ -7,6 +10,8 @@ def raise_nofile(nofile_atleast=4096):
     parallel executing plot generators vs. Ubuntu 16.04 default ulimit -n 1024 or OS X El Captian 256
     temporary setting extinguishing with Python session.
     """
+    if res is None:
+        return (None,)*2
 #%% (0) what is current ulimit -n setting?
     soft,ohard = res.getrlimit(res.RLIMIT_NOFILE)
     hard = ohard
