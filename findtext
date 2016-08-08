@@ -11,7 +11,7 @@ init()
 from argparse import ArgumentParser
 p = ArgumentParser(description='searches for TEXT under DIR and echos back filenames')
 p.add_argument('txt',help='text to search for') #required
-p.add_argument('pat',help='glob pattern',nargs='?',default=['*.py','*.rst','*.txt')
+p.add_argument('pat',help='glob pattern',nargs='?',default=['*.py','*.rst','*.txt'])
 p.add_argument('rdir',help='root dir to search',nargs='?',default='.')
 p.add_argument('-v','--verbose',action='store_true')
 p = p.parse_args()
