@@ -44,4 +44,6 @@ class Os:
                 self.iswsl=True
 
 if __name__ == '__main__':
-    print(Os().__dict__)
+    for k,v in Os().__dict__.items():
+        if v:
+            print(k)
