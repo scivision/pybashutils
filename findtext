@@ -1,46 +1,62 @@
 #!/usr/bin/env python
 
 MAXSIZE=10e6  #[bytes]
-import logging
+#import logging
+from six import string_types
 from pythonutils import Path
 from binaryornot.check import is_binary
 
 from colorama import init,Fore,Back
 init()
 
-from argparse import ArgumentParser
-p = ArgumentParser(description='searches for TEXT under DIR and echos back filenames')
-p.add_argument('txt',help='text to search for') #required
-p.add_argument('pat',help='glob pattern',nargs='?',default=['*.py','*.rst','*.txt'])
-p.add_argument('rdir',help='root dir to search',nargs='?',default='.')
-p.add_argument('-v','--verbose',action='store_true')
-p = p.parse_args()
 
-txt=p.txt
-mat=[]
+def findtext(root,txt,globext):
+    if isinstance(globext,string_types):
+        globext = [globext]
 
-flist = Path(p.rdir).expanduser().rglob(p.pat)
-for f in flist:
-    if f.is_file() and not is_binary(str(f)) and f.stat().st_size<MAXSIZE:
-        with f.open('r') as o:
-            here = False
-            matchinglines=[]
-            try:
-                for i,l in enumerate(o):
-                    if not txt in l:
-                        continue
-                    matchinglines.append('{}: {}'.format(i,l))
-                    here=True
-            except UnicodeDecodeError as e:
-                if p.verbose:
-                    print('error on file {}  {}'.format(f,e))
-                logging.info('error on file {}  {}'.format(f,e))
+    for e in globext:
+        searchlist(Path(root).expanduser().rglob(e), txt)
 
-        if here:
-            print(Back.MAGENTA + str(f))
-            print(Back.BLACK + '\n'.join(matchinglines))
-            mat.append(f)
+def searchlist(flist,txt):
 
-print('\n'.join([str(m) for m in mat]))
+    mat = []
+
+    for f in flist:
+        if f.is_file() and f.stat().st_size<MAXSIZE and not is_binary(str(f)):
+            here,matchinglines = searchfile(f,txt)
+
+            if here:
+                print(Back.MAGENTA + str(f))
+                print(Back.BLACK + '\n'.join(matchinglines))
+                mat.append(f)
+
+def searchfile(f,txt):
+    here = False
+    matchinglines=[]
+
+    with f.open('r') as o:
+
+        try:
+            for i,l in enumerate(o):
+                if not txt in l:
+                    continue
+                matchinglines.append('{}: {}'.format(i,l))
+                here=True
+        except UnicodeDecodeError as e:
+            if p.verbose:
+                print('error on file {}  {}'.format(f,e))
+            #logging.info('error on file {}  {}'.format(f,e))
+
+    return here,matchinglines
 
 
+if __name__ == '__main__':
+    from argparse import ArgumentParser
+    p = ArgumentParser(description='searches for TEXT under DIR and echos back filenames')
+    p.add_argument('txt',help='text to search for') #required
+    p.add_argument('globext',help='glob pattern',nargs='?',default=['*.py','*.rst','*.txt'])
+    p.add_argument('rdir',help='root dir to search',nargs='?',default='.')
+    p.add_argument('-v','--verbose',action='store_true')
+    p = p.parse_args()
+
+    findtext(p.rdir, p.txt, p.globext)
