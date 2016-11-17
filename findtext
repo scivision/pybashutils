@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-MAXSIZE=10e6  #[bytes]
+MAXSIZE=20e6  #[bytes]
 #import logging
+from subprocess import check_call,CalledProcessError,DEVNULL
 from six import string_types
 from pythonutils import Path
 from binaryornot.check import is_binary
@@ -15,24 +16,49 @@ def findtext(root,txt,globext):
         globext = [globext]
 
     for e in globext:
-        searchlist(Path(root).expanduser().rglob(e), txt)
+        e = Path(e).expanduser() # in case "ext" is actually a specific filename
+        if e.is_file():
+            searchlist([e],txt)
+        else: # usual case
+            searchlist(Path(root).expanduser().rglob(str(e)), txt)
 
 def searchlist(flist,txt):
 
     mat = []
 
     for f in flist:
-        if f.is_file() and f.stat().st_size<MAXSIZE and not is_binary(str(f)):
-            here,matchinglines = searchfile(f,txt)
+        # note that searchfile() does NOT work for PDF even with text inside...but Grep does. Hmm..
+        if f.is_file() and f.stat().st_size<MAXSIZE:
+            matchinglines = None
+
+            if not is_binary(str(f)):
+                here,matchinglines = searchfile(f,txt)
+            elif f.suffix=='.pdf':
+                here = searchbinary(f,txt)
 
             if here:
                 print(Back.MAGENTA + str(f))
-                print(Back.BLACK + '\n'.join(matchinglines))
+                if matchinglines:
+                    print(Back.BLACK + '\n'.join(matchinglines))
                 mat.append(f)
+
+def searchbinary(f,txt):
+    # FIXME: use Python directly to make cross-platform Windows
+    try:
+        check_call(['grep',txt,str(f)],stdout=DEVNULL) # grep return 0 if match
+        return True
+    except CalledProcessError: # grep returns 1 if no match
+        return False
+
+
 
 def searchfile(f,txt):
     here = False
     matchinglines=[]
+    
+    # NO speedup observed from doing this first
+#    if not txt in str(f):
+ #       return here,matchinglines
 
     with f.open('r') as o:
 
@@ -54,7 +80,7 @@ if __name__ == '__main__':
     from argparse import ArgumentParser
     p = ArgumentParser(description='searches for TEXT under DIR and echos back filenames')
     p.add_argument('txt',help='text to search for') #required
-    p.add_argument('globext',help='glob pattern',nargs='?',default=['*.py','*.rst','*.txt'])
+    p.add_argument('globext',help='glob pattern',nargs='?',default=['*.py','*.rst','*.txt','*.pdf'])
     p.add_argument('rdir',help='root dir to search',nargs='?',default='.')
     p.add_argument('-v','--verbose',action='store_true')
     p = p.parse_args()
