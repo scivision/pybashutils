@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 
 MAXSIZE=20e6  #[bytes]
-#import logging
-from subprocess import check_call,CalledProcessError,DEVNULL
-from six import string_types
+from six import PY2,string_types
+from subprocess import check_call,CalledProcessError
+if PY2:
+    from os import devnull as DEVNULL
+else:
+    from subprocess import DEVNULL
+#
 from pythonutils import Path
 from binaryornot.check import is_binary
 
