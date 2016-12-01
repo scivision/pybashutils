@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
 MAXSIZE=20e6  #[bytes]
-from six import PY2,string_types
+from six import string_types
 from subprocess import check_call,CalledProcessError
-if PY2:
+try:
     from os import devnull as DEVNULL
-else:
+except ImportError:
     from subprocess import DEVNULL
 #
 from pythonutils import Path
