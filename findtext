@@ -4,9 +4,10 @@ MAXSIZE=20e6  #[bytes]
 from six import string_types
 from subprocess import check_call,CalledProcessError
 try:
-    from os import devnull as DEVNULL
-except ImportError:
     from subprocess import DEVNULL
+except ImportError:
+    from os import devnull
+    DEVNULL = open(devnull)
 #
 from pythonutils import Path
 from binaryornot.check import is_binary
@@ -16,7 +17,7 @@ init()
 
 
 def findtext(root,txt,globext):
-    if isinstance(globext,string_types):
+    if isinstance(globext,(Path,string_types)):
         globext = [globext]
 
     for e in globext:
@@ -53,13 +54,15 @@ def searchbinary(f,txt):
         return True
     except CalledProcessError: # grep returns 1 if no match
         return False
+    except Exception as e: # catch-all for unexpected error
+        print(f,e)
 
 
 
 def searchfile(f,txt):
     here = False
     matchinglines=[]
-    
+
     # NO speedup observed from doing this first
 #    if not txt in str(f):
  #       return here,matchinglines
