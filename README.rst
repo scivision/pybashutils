@@ -12,6 +12,7 @@ Collection of Bash/Python/Matlab/Octave scripts I've made that may be generally 
 =========   ===========
 function    description
 =========   ===========
+h5tester.py test HDF5 files for corruption--if the variable(s) have Fletcher 32 enabled
 cupd        update conda packages (well, the ones I use)
 checkIP     Sends you an email automatically if your IP address changes
 getIP       gets your public IP address (not the internal NAT address)
