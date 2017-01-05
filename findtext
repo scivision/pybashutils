@@ -40,6 +40,8 @@ def searchlist(flist,txt):
                 here,matchinglines = searchfile(f,txt)
             elif f.suffix=='.pdf':
                 here = searchbinary(f,txt)
+            else:
+                continue
 
             if here:
                 print(Back.MAGENTA + str(f))
