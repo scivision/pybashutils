@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-
-MAXSIZE=20e6  #[bytes]
+from __future__ import print_function
 from six import string_types
 from subprocess import check_call,CalledProcessError
 try:
@@ -15,21 +14,27 @@ from binaryornot.check import is_binary
 from colorama import init,Fore,Back
 init()
 
+MAXSIZE=20e6  #[bytes]
 
-def findtext(root,txt,globext):
+def findtext(root,txt,globext, verbose=0):
     if isinstance(globext,(Path,string_types)):
         globext = [globext]
 
     for e in globext:
         e = Path(e).expanduser() # in case "ext" is actually a specific filename
         if e.is_file():
-            searchlist([e],txt)
+            searchlist([e],txt, verbose)
         else: # usual case
-            searchlist(Path(root).expanduser().rglob(str(e)), txt)
+            searchlist(Path(root).expanduser().rglob(str(e)), txt, verbose)
 
-def searchlist(flist,txt):
+def searchlist(flist,txt,verbose):
 
     mat = []
+    
+    if verbose>=0:
+        endl='\n'
+    else:
+        endl=' '
 
     for f in flist:
         # note that searchfile() does NOT work for PDF even with text inside...but Grep does. Hmm..
@@ -37,15 +42,15 @@ def searchlist(flist,txt):
             matchinglines = None
 
             if not is_binary(str(f)):
-                here,matchinglines = searchfile(f,txt)
+                here,matchinglines = searchfile(f,txt,verbose)
             elif f.suffix=='.pdf':
                 here = searchbinary(f,txt)
             else:
                 continue
 
             if here:
-                print(Back.MAGENTA + str(f))
-                if matchinglines:
+                print(Back.MAGENTA + str(f), end=endl)
+                if matchinglines and verbose>=0:
                     print(Back.BLACK + '\n'.join(matchinglines))
                 mat.append(f)
 
@@ -61,7 +66,7 @@ def searchbinary(f,txt):
 
 
 
-def searchfile(f,txt):
+def searchfile(f,txt,verbose):
     here = False
     matchinglines=[]
 
@@ -78,7 +83,7 @@ def searchfile(f,txt):
                 matchinglines.append('{}: {}'.format(i,l))
                 here=True
         except UnicodeDecodeError as e:
-            if p.verbose:
+            if verbose>0:
                 print('error on file {}  {}'.format(f,e))
             #logging.info('error on file {}  {}'.format(f,e))
 
@@ -92,6 +97,11 @@ if __name__ == '__main__':
     p.add_argument('globext',help='glob pattern',nargs='?',default=['*.py','*.rst','*.txt','*.pdf','*.md','*.tex'])
     p.add_argument('rdir',help='root dir to search',nargs='?',default='.')
     p.add_argument('-v','--verbose',action='store_true')
+    p.add_argument('-q','--quiet',action='store_true')
     p = p.parse_args()
+    
+    verbose = 0
+    verbose -= p.quiet
+    verbose += p.verbose
 
-    findtext(p.rdir, p.txt, p.globext)
+    findtext(p.rdir, p.txt, p.globext, verbose)
