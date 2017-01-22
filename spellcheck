@@ -5,14 +5,8 @@ Ctrl \  to abort
 MAXSIZE=20e6  #[bytes]
 from six import string_types
 from subprocess import check_call
-try:
-    from subprocess import DEVNULL
-except ImportError:
-    from os import devnull
-    DEVNULL = open(devnull)
 #
 from pythonutils import Path
-
 
 def findtext(root,globext):
     if isinstance(globext,(Path,string_types)):
