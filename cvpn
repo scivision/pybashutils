@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 dvpn
 sudo vpnc-connect $1
