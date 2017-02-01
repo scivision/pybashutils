@@ -1,5 +1,4 @@
 setuptools
 nose
 colorama
-pathlib2
 binaryornot
