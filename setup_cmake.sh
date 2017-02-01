@@ -3,7 +3,7 @@
 # requires libncurses-dev
 
 (
-cver=3.7.1
+cver=3.7.2
 
 wd=$(mktemp -d)
 wget -nc -P $wd https://cmake.org/files/v3.7/cmake-$cver.tar.gz
