@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-from __future__ import print_function
-from six import string_types
 from pathlib import Path
 from subprocess import check_call,CalledProcessError
 try:
@@ -16,7 +14,7 @@ init()
 MAXSIZE=20e6  #[bytes]
 
 def findtext(root,txt,globext, verbose=0):
-    if isinstance(globext,(Path,string_types)):
+    if isinstance(globext,(Path,str)):
         globext = [globext]
 
     for e in globext:

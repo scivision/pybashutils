@@ -3,7 +3,7 @@
 tars (optional compression) and moves files per directory
 """
 import logging
-from pythonutils import Path
+from pathlib import Path
 import tarfile
 
 def tarcp(din,fout,method='xz',compresslevel=1):
