@@ -1,16 +1,17 @@
 #!/bin/bash
 
 # requires libncurses-dev
+set -e
 
 (
-cver=3.7.2
+cver=3.8.0-rc1
 
 wd=$(mktemp -d)
-wget -nc -P $wd https://cmake.org/files/v3.7/cmake-$cver.tar.gz
+wget -nc -P $wd https://cmake.org/files/v${cver:0:3}/cmake-$cver.tar.gz
 cd $wd
 tar -xf cmake-$cver.tar.gz
 ./cmake-$cver/configure
-make -j7
+make -j4
 sudo make install
 echo "reopen a new terminal to use CMake $cver"
 )

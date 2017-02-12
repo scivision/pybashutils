@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 from setuptools import setup
 
-with open('requirements.txt') as f:
-    required = f.read().splitlines()
+req = ['nose','colorama','binaryornot']
 
 setup(name='pythonutils',
-	  install_requires=required,
+	  install_requires=req,
       packages=['pythonutils'],
 	  )
