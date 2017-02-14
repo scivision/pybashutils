@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-"""
-Provides a Matlab/Octave-like "isX" for fine-grained OS detection
-
-This is a standalone script you can copy out of this repo.
-"""
 
 from platform import system
 
@@ -34,19 +28,12 @@ class Os:
             self.mac    = True
         elif 'linux' in syst:
             self.linux  = True
+            # detect WSL https://github.com/Microsoft/BashOnWindows/issues/423
+            with open('/proc/version','r') as f:
+                if 'microsoft' in f.read().lower():
+                    self.wsl = True
+                    self.linux = False
         elif 'windows' in syst:
             self.windows= True
         elif 'bsd' in syst:
             self.bsd    = True
-
-        # detect WSL https://github.com/Microsoft/BashOnWindows/issues/423
-        if self.linux:
-            with open('/proc/version','r') as f:
-                vers = f.read()
-            if 'microsoft' in vers.lower():
-                self.wsl = True
-
-if __name__ == '__main__':
-    for k,v in Os().__dict__.items():
-        if v:
-            print(k)

@@ -18,6 +18,14 @@ def test_ulimit():
     assert soft>=4096
     assert hard>=4096
 
+def test_os():
+    from pythonutils.windows_linux_detect.py import Os
+    a = []
+    for k,v in Os().__dict__.items():
+        if v:
+            a.append(k)
+    assert len(k) > 1
+
 if __name__ == '__main__':
 
 #	test_getip()
