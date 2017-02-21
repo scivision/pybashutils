@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 """
-https://www.scivision.co/youtube-live-ffmpeg-livestream/
-
 Cross-platform live streaming to YouTube Live using FFmpeg
 
 this is alpha testing script
+
+https://www.scivision.co/youtube-live-ffmpeg-livestream/
 """
 import subprocess as S
 from getpass import getpass
 
 try:
-    ret = S.check_call(('ffmpeg','-h'), stdout=S.DEVNULL)
+    S.check_call(('ffmpeg','-h'), stdout=S.DEVNULL)
 except S.CalledProcessError:
     raise FileNotFoundError('FFmpeg is not installed for your system.')
 
@@ -25,8 +25,11 @@ Nchan = '1'
 
 def youtubelive(useaudio=False):
 
-    vid1 = ('-f', 'x11grab','-r',str(streamfps),'-s',res,'-i',origin)
-    vid2 = ('-vcodec','libx264','-pix_fmt','yuv420p','-preset','ultrafast','-g',str(group))
+    vid1 = ('-f', 'x11grab',
+            '-r',str(streamfps),'-s',res,'-i',origin)
+
+    vid2 = ('-vcodec','libx264','-pix_fmt','yuv420p',
+            '-preset','ultrafast','-g',str(group))
 
     if useaudio:
         aud1 = ('-f','alsa','-ac',Nchan,'-i',audiochan)
