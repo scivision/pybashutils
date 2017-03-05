@@ -1,11 +1,7 @@
 #!/usr/bin/env python
 from pathlib import Path
 from subprocess import check_call,CalledProcessError
-try:
-    from subprocess import DEVNULL
-except ImportError:
-    from os import devnull
-    DEVNULL = open(devnull)
+from subprocess import DEVNULL
 #
 from binaryornot.check import is_binary
 from colorama import init,Fore,Back
@@ -27,7 +23,7 @@ def findtext(root,txt,globext, verbose=0):
 def searchlist(flist,txt,verbose):
 
     mat = []
-    
+
     if verbose>=0:
         endl='\n'
     else:
