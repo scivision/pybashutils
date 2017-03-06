@@ -5,6 +5,10 @@ Cross-platform live streaming to YouTube Live using FFmpeg
 this is alpha testing script
 
 https://www.scivision.co/youtube-live-ffmpeg-livestream/
+
+https://trac.ffmpeg.org/wiki/EncodingForStreamingSites
+
+https://support.google.com/youtube/answer/2853702
 """
 import subprocess as S
 from getpass import getpass
@@ -14,37 +18,62 @@ try:
 except S.CalledProcessError:
     raise FileNotFoundError('FFmpeg is not installed for your system.')
 
-streamfps = 10
+streamfps = 30
 res = '1024x720'
 origin = ':0.0+0,24'
-group=20
-bufsize='512k'
+COMPPRESET='veryfast'
 
 audiochan = 'hw:1,0'
 Nchan = '1'
 
+#%% minimum bitrates specified by YouTube. Key is vertical pixels (height)
+br30 = {'2160':13000,
+        '1440':6000,
+        '1080':3000,
+        '720':1500,
+        '480':500,
+        '360':400,
+        '240':300,
+        }
+
+br60 = {'2160':20000,
+        '1440':9000,
+        '1080':4500,
+        '720':2250,
+        }
+
 def youtubelive(useaudio=False):
+    y = res.split('x')[1]
+    
+    if streamfps <= 30:
+       cvbr = br30[y]
+    else:
+       cvbr = br60[y]
+    
 
-    vid1 = ('-f', 'x11grab',
-            '-r',str(streamfps),'-s',res,'-i',origin)
+    vid1 = ['-f', 'x11grab',
+            '-r',str(streamfps),'-s',res,'-i',origin]
 
-    vid2 = ('-vcodec','libx264','-pix_fmt','yuv420p',
-            '-preset','ultrafast','-g',str(group))
+    vid2 = ['-vcodec','libx264','-pix_fmt','yuv420p',
+            '-preset',COMPPRESET,
+            '-b:v',f'{cvbr}k',
+            '-g',f'{2*streamfps}']
 
     if useaudio:
-        aud1 = ('-f','alsa','-ac',Nchan,'-i',audiochan)
-        aud2 = ('-acodec','libmp3lame','-ar','44100' )
+        aud1 = ['-f','alsa','-ac',Nchan,'-i',audiochan]
+        aud2 = ['-acodec','libmp3lame','-ar','44100' ]
     else:
-        aud1 = aud2 = ()
+        aud1 = aud2 = []
 
-    codec = ('-threads','0','-bufsize',bufsize,
-            '-f','flv')
+    codec = ['-threads','0',
+             '-bufsize',f'{2*cvbr}k',
+            '-f','flv']
 
 
 
-    cmd = ('ffmpeg',) + vid1 + aud1 + vid2 + aud2 + codec
+    cmd = ['ffmpeg'] + vid1 + aud1 + vid2 + aud2 + codec
 
-    print(cmd)
+    print(' '.join(cmd))
 
     S.run(cmd+('rtmp://a.rtmp.youtube.com/live2/'+getpass('YouTube Live Stream ID: '),),
                 stdout=S.DEVNULL)
