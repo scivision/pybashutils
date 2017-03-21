@@ -56,8 +56,8 @@ def youtubelive(useaudio=False):
 
     vid2 = ['-vcodec','libx264','-pix_fmt','yuv420p',
             '-preset',COMPPRESET,
-            '-b:v',f'{cvbr}k',
-            '-g',f'{2*streamfps}']
+            '-b:v',str(cvbr)+'k',
+            '-g',str(2*streamfps)]
 
     if useaudio:
         aud1 = ['-f','alsa','-ac',Nchan,'-i',audiochan]
@@ -66,7 +66,7 @@ def youtubelive(useaudio=False):
         aud1 = aud2 = []
 
     codec = ['-threads','0',
-             '-bufsize',f'{2*cvbr}k',
+             '-bufsize',str(2*cvbr)+'k',
             '-f','flv']
 
 
