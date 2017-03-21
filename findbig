@@ -1,3 +1,3 @@
 #!/bin/bash
 
-\du -hd1 $1 | sort -h | head -n 8
+\du -hd1 $1 | sort -hr | head -n 8
