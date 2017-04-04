@@ -20,13 +20,13 @@ VERBOSE=False
 
 def checkh5(fn,var=None):
     fn = Path(fn).expanduser()
-    assert fn.is_file(),'{} is not a file'.format(fn)
+    assert fn.is_file(),f'{fn} is not a file'
 
     try:
         with h5py.File(str(fn),'r',libver='latest') as f:
             f.visititems(h5print)
     except RuntimeError as e:
-        print('Error reading {}'.format(fn),file=stderr)
+        print(f'Error reading {fn}',file=stderr)
         if var:
             testh5var(var)
 
@@ -34,12 +34,12 @@ def h5print(name, obj):
 
     if isinstance(obj,h5py.Dataset):
         if VERBOSE:
-            print('{}: {}  {}'.format(name, obj.dtype, obj.shape))
+            print('{name}: {obj.dtype}  {obj.shape}')
     elif isinstance(obj,h5py.Group):
         obj.visititems(h5print)
 
 def testh5var(var):
-    print('checking {}'.format(var))
+    print(f'checking {var}')
     with h5py.File(p.fn,'r',libver='latest') as f:
         print(f[var].fletcher32)
         print(f[var].chunks)
@@ -67,7 +67,7 @@ if __name__ == '__main__':
     elif flist.is_file():
         flist = [flist]
     else:
-        raise IOError('What is {}. It is not a path or file.'.format(flist))
+        raise IOError(f'What is {flist}. It is not a path or file.')
 
     for fn in flist:
         checkh5(fn,p.var)
