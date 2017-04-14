@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 """
 iteratively find files with "bad" characters that Python doesn't like.
-E.g. useful for f2py or others.
+useful for f2py, BibTeX and more.
+Michael Hirsch, Ph.D.
 """
 from tempfile import mkstemp
 from subprocess import run
