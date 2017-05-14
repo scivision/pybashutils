@@ -4,7 +4,7 @@
 set -e
 
 (
-cver=3.8.0
+cver=3.8.1
 
 wd=$(mktemp -d)
 wget -nc -P $wd https://cmake.org/files/v${cver:0:3}/cmake-$cver.tar.gz
