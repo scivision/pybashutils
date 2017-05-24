@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-
 req = ['nose','colorama',]
 pipreq=['binaryornot']
+
 import pip
 try:
     import conda.cli
