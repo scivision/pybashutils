@@ -1,7 +1,7 @@
-.. image:: https://travis-ci.org/scienceopen/pybashutils.svg?branch=master
-    :target: https://travis-ci.org/scienceopen/pybashutils
-.. image:: https://coveralls.io/repos/github/scienceopen/pybashutils/badge.svg?branch=master 
-    :target: https://coveralls.io/github/scienceopen/pybashutils?branch=master
+.. image:: https://travis-ci.org/scivision/pybashutils.svg?branch=master
+    :target: https://travis-ci.org/scivision/pybashutils
+.. image:: https://coveralls.io/repos/github/scivision/pybashutils/badge.svg?branch=master 
+    :target: https://coveralls.io/github/scivision/pybashutils?branch=master
 
 
 =================================
@@ -35,7 +35,7 @@ This procedure assumes you're on a Linux device
 1. download the code::
 
     cd ~
-    git clone --depth 1 https://github.com/scienceopen/pybashutils.git
+    git clone --depth 1 https://github.com/scivision/pybashutils.git
 
 2. add the scripts to your Path::
 
@@ -66,6 +66,6 @@ and your network drive is available as ~/U
 
 Note
 ~~~~
-if you have any files open (like say a spreadsheet on the ~/U drive), ~/U will stay connected until you close that file(s).
+if you have any files open (like say a spreadsheet on the ``~/U`` drive), ``~/U`` will stay connected until you close that file(s).
 
 
