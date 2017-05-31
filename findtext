@@ -87,7 +87,7 @@ if __name__ == '__main__':
     from argparse import ArgumentParser
     p = ArgumentParser(description='searches for TEXT under DIR and echos back filenames')
     p.add_argument('txt',help='text to search for') #required
-    p.add_argument('globext',help='glob pattern',nargs='?',default=['*.py','*.rst','*.txt','*.pdf','*.md','*.tex'])
+    p.add_argument('globext',help='glob pattern',nargs='?',default=['*.py','*.rst','*.txt','*.pdf','*.md','*.tex','*.f','*.f90'])
     p.add_argument('rdir',help='root dir to search',nargs='?',default='.')
     p.add_argument('-v','--verbose',action='store_true')
     p.add_argument('-q','--quiet',action='store_true')
