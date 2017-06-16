@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-from pathlib import Path
+from __future__ import print_function
+from pythonutils import Path
 from subprocess import check_call,CalledProcessError
 from subprocess import DEVNULL
 #
@@ -77,7 +78,7 @@ def searchfile(f,txt,verbose):
                 here=True
         except UnicodeDecodeError as e:
             if verbose>0:
-                print('error on file {}  {}'.format(f,e))
+                print('error on file',f,e)
             #logging.info('error on file {}  {}'.format(f,e))
 
     return here,matchinglines

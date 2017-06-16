@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-req = ['nose','colorama',]
+req = ['nose','colorama','pathlib2']
 pipreq=['binaryornot']
 
 import pip
@@ -17,4 +17,5 @@ setup(name='pythonutils',
       author='Michael Hirsch, Ph.D.',
       description='Cross-platform utilities for computer maintenance',
       url='https://github.com/scivison/pybashutils',
+      install_requires=req+pipreq,
 	  )
