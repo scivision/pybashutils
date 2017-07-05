@@ -3,8 +3,6 @@
 # requires libncurses-dev
 set -e
 
-INSTALL_DIR=$1
-
 (
 cver=3.9.0-rc5
 
@@ -16,13 +14,19 @@ cd $wd
 
 tar -xf cmake-$cver.tar.gz
 
-./cmake-$cver/bootstrap --prefix=INSTALL_DIR
+if [[ $# -ge 1 ]]; then
+    echo "installing cmake to $1"
+    ./cmake-$cver/bootstrap --prefix=$1
+else
+    echo "installing cmake to default location"
+    ./cmake-$cver/bootstrap
+fi
 
 make -j4
 
 make install
+)
 
 echo "reopen a new terminal to use CMake $cver"
 
 [[ -z $INSTALL_DIR ]] && echo " you may wish to add $INSTALL_DIR to your PATH"
-)
