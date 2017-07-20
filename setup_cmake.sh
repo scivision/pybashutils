@@ -4,7 +4,7 @@
 set -e
 
 (
-cver=3.9.0-rc5
+cver=3.9.0
 
 wd=/tmp
 
