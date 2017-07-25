@@ -1,6 +1,7 @@
 #!/bin/bash
-# requires libncurses-dev
 set -e
+
+sudo apt install g++ make libncurses-dev
 
 cver=3.9.0
 
