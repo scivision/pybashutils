@@ -23,7 +23,7 @@ fi
 
 make -j4
 
-make install
+[[ `make install` ]] && sudo make install
 )
 
 echo "reopen a new terminal to use CMake $cver"
