@@ -1,13 +1,9 @@
 #!/bin/bash
-[[ $# -eq 0 ]] && echo "Usage: eps2pdf input.eps" && exit 1
-if [[ $# -eq 2 ]]; then
-OutFN=$2
-else
-OutFN=joined.pdf
-fi
-#if [[ $# -eq 3 ]]; then
-#Orient=$3
-#fi
+[[ $# == 0 ]] && { echo "Usage: eps2pdf input.eps"; exit 1; }
+[[ $# > 2  ]] && { echo "Usage: eps2pdf input.eps"; exit 1; }
+[[ $# == 1 ]] && OutFN=joined.pdf
+[[ $# == 2 ]] && OutFN=$2
+#[[ $# -eq 3 ]] && Orient=$3
 
 
 gs -sDEVICE=pdfwrite \
@@ -22,4 +18,4 @@ gs -sDEVICE=pdfwrite \
 #    -c quit
 
 
-echo wrote $1 to $OutFN
+echo "wrote $1 to $OutFN"

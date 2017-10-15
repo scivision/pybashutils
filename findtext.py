@@ -1,16 +1,14 @@
 #!/usr/bin/env python
-from __future__ import print_function
-from pythonutils import Path
-from subprocess import check_call,CalledProcessError
-from subprocess import DEVNULL
-#
+import warnings
+from pathlib import Path
+import subprocess
 from binaryornot.check import is_binary
-from colorama import init,Fore,Back
-init()
+import colorama
+colorama.init()
 
 MAXSIZE=20e6  #[bytes]
 
-def findtext(root,txt,globext, verbose=0):
+def findtext(root:Path, txt:str, globext:str, verbose:int) -> None:
     if isinstance(globext,(Path,str)):
         globext = [globext]
 
@@ -21,14 +19,11 @@ def findtext(root,txt,globext, verbose=0):
         else: # usual case
             searchlist(Path(root).expanduser().rglob(str(e)), txt, verbose)
 
-def searchlist(flist,txt,verbose):
+def searchlist(flist:list, txt:str, verbose:int) -> None:
 
     mat = []
 
-    if verbose>=0:
-        endl='\n'
-    else:
-        endl=' '
+    endl='\n' if verbose>=0 else ' '
 
     for f in flist:
         # note that searchfile() does NOT work for PDF even with text inside...but Grep does. Hmm..
@@ -43,24 +38,25 @@ def searchlist(flist,txt,verbose):
                 continue
 
             if here:
-                print(Back.MAGENTA + str(f), end=endl)
+                print(colorama.Back.MAGENTA + str(f), end=endl)
                 if matchinglines and verbose>=0:
-                    print(Back.BLACK + '\n'.join(matchinglines))
+                    print(colorama.Back.BLACK + '\n'.join(matchinglines))
                 mat.append(f)
 
-def searchbinary(f,txt):
+def searchbinary(f:Path, txt:str) -> bool:
     # FIXME: use Python directly to make cross-platform Windows
     try:
-        check_call(['grep',txt,str(f)],stdout=DEVNULL) # grep return 0 if match
+        subprocess.check_call(['grep', txt, f], 
+                              stdout=subprocess.DEVNULL) # grep return 0 if match
         return True
-    except CalledProcessError: # grep returns 1 if no match
+    except subprocess.CalledProcessError: # grep returns 1 if no match
         return False
     except Exception as e: # catch-all for unexpected error
-        print(f,e)
+        warnings.warn(f'{f}  {e}')
 
 
 
-def searchfile(f,txt,verbose):
+def searchfile(f:Path, txt:str, verbose:int):
     here = False
     matchinglines=[]
 
@@ -69,27 +65,28 @@ def searchfile(f,txt,verbose):
  #       return here,matchinglines
 
     with f.open('r') as o:
-
         try:
             for i,l in enumerate(o):
                 if not txt in l:
                     continue
-                matchinglines.append('{}: {}'.format(i,l))
+                matchinglines.append(f'{i}: {l}')
                 here=True
         except UnicodeDecodeError as e:
-            if verbose>0:
-                print('error on file',f,e)
-            #logging.info('error on file {}  {}'.format(f,e))
+            if verbose > 0:
+                warnings.warn(f'{f} {e}')
 
     return here,matchinglines
 
 
 if __name__ == '__main__':
+    import signal
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+    
     from argparse import ArgumentParser
     p = ArgumentParser(description='searches for TEXT under DIR and echos back filenames')
     p.add_argument('txt',help='text to search for') #required
-    p.add_argument('globext',help='glob pattern',nargs='?',default=['*.py','*.rst','*.txt','*.pdf','*.md','*.tex','*.f','*.f90'])
-    p.add_argument('rdir',help='root dir to search',nargs='?',default='.')
+    p.add_argument('globext',help='filename glob',nargs='?',default=['*.py','*.rst','*.txt','*.pdf','*.md','*.tex','*.f','*.f90'])
+    p.add_argument('dir',help='root dir to search',nargs='?',default='.')
     p.add_argument('-v','--verbose',action='store_true')
     p.add_argument('-q','--quiet',action='store_true')
     p = p.parse_args()
@@ -98,4 +95,4 @@ if __name__ == '__main__':
     verbose -= p.quiet
     verbose += p.verbose
 
-    findtext(p.rdir, p.txt, p.globext, verbose)
+    findtext(p.dir, p.txt, p.globext, verbose)

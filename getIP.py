@@ -41,6 +41,9 @@ def getip(interface=None):
     return addr
 
 if __name__ == '__main__':
+    import signal
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+    
     from argparse import ArgumentParser
     p = ArgumentParser()
     p.add_argument('-i','--iface',help='network interface to use')

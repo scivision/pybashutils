@@ -13,13 +13,13 @@
 # Ref: http://stackoverflow.com/questions/3160909/how-do-i-deal-with-certificates-using-curl-while-trying-to-access-an-https-url
 #
 
-url=('https://wtfismyip.com/text' 'https://api.ipify.org' 'http://ident.me' 'http://ipecho.net/plain')
+url=('https://wtfismyip.com/text' 'https://api.ipify.org' 'https://ident.me' 'http://ipecho.net/plain')
 
 for u in ${url[@]}; do
   curl -6 -s -m 2 $u && break
 done
 
 for u in ${url[@]}; do
-  curl -4 -s -m 2 $u && { echo; break; }
+  curl -4 -s -m 2 $u && break
 done
 

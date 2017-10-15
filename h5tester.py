@@ -23,7 +23,7 @@ def checkh5(fn,var=None):
     assert fn.is_file(),f'{fn} is not a file'
 
     try:
-        with h5py.File(str(fn),'r',libver='latest') as f:
+        with h5py.File(fn,'r',libver='latest') as f:
             f.visititems(h5print)
     except RuntimeError as e:
         print(f'Error reading {fn}',file=stderr)
@@ -39,7 +39,7 @@ def h5print(name, obj):
         obj.visititems(h5print)
 
 def testh5var(var):
-    print(f'checking {var}')
+    print('checking',var)
     with h5py.File(p.fn,'r',libver='latest') as f:
         print(f[var].fletcher32)
         print(f[var].chunks)

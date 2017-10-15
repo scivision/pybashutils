@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# consider Python dircmp, filecmp
-
-set -u
-
-#compares directory trees by filename only -- only differences are reported
-
-diff <(cd $1 && find | sort) <(cd $2 && find | sort)

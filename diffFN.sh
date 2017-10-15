@@ -11,15 +11,15 @@
 # EXAMPLE
 # diffFN /home/me/dir1 /home/me/dir2
 
-: ${2?example: diffFN /home/me/dir1 /home/me/dir2}
+[[ $# -ne 2 ]] && { echo "diffFN DIR1 DIR2"; exit 1; }
 
 #remove single trailing slash, if present
 d1=${1%/}
 d2=${2%/}
 
 #count files, removing root directory name, sorting to keep out false differences
-dir1list=($(find $d1 -type f | sed "s,^${d1}/,," | sort))
-dir2list=($(find $d2 -type f | sed "s,^${d2}/,," | sort))
+dir1list=($(find $d1 -type f 2>/dev/null | sed "s,^${d1}/,," | sort))
+dir2list=($(find $d2 -type f 2>/dev/null | sed "s,^${d2}/,," | sort))
 
 echo "${#dir1list[@]} files in $d1"
 echo "${#dir2list[@]} files in $d2"
