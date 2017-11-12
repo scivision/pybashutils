@@ -8,8 +8,8 @@ from ipaddress import ip_address
 import pycurl
 from io import BytesIO
 
-urls = ['https://ident.me','http://wtfismyip.com/text', # ipv6 and ipv4
-        'https://ipecho.net/plain','https://api.ipify.org'] # ipv4 only
+urls = ['https://ident.me', # ipv6 and ipv4
+        'https://api.ipify.org'] # ipv4 only
 length=45 #http://stackoverflow.com/questions/166132/maximum-length-of-the-textual-representation-of-an-ipv6-address
 
 def getip(interface=None):
