@@ -1,14 +1,6 @@
 #!/usr/bin/env python
-req = ['nose','colorama','pathlib2']
-pipreq=['binaryornot']
-
-import pip
-try:
-    import conda.cli
-    conda.cli.main('install',*req)
-except Exception as e:    
-    pip.main(['install'] + req)
-pip.main(['install'] + pipreq)
+req = ['nose','colorama',
+       'binaryornot']
 # %%
 from setuptools import setup
 
@@ -17,5 +9,6 @@ setup(name='pythonutils',
       author='Michael Hirsch, Ph.D.',
       description='Cross-platform utilities for computer maintenance',
       url='https://github.com/scivison/pybashutils',
-      install_requires=req+pipreq,
+      install_requires=req,
+      python_requires='>=3.5',
 	  )

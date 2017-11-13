@@ -32,14 +32,13 @@ Installation:
 -------------
 This procedure assumes you're on a Linux device
 
-1. download the code::
+1. install the code::
 
-    cd ~
-    git clone --depth 1 https://github.com/scivision/pybashutils.git
+       pip install -e .
 
 2. add the scripts to your Path::
 
-    nano ~/.bashrc
+       nano ~/.bashrc
 
 at the bottom of that file (use Page Down key to get there) type::
 
