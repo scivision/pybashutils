@@ -1,8 +1,12 @@
 .. image:: https://travis-ci.org/scivision/pybashutils.svg?branch=master
     :target: https://travis-ci.org/scivision/pybashutils
+
 .. image:: https://coveralls.io/repos/github/scivision/pybashutils/badge.svg?branch=master 
     :target: https://coveralls.io/github/scivision/pybashutils?branch=master
 
+.. image:: https://api.codeclimate.com/v1/badges/530575d7d1a47e7f3fa1/maintainability
+   :target: https://codeclimate.com/github/scivision/pybashutils/maintainability
+   :alt: Maintainability
 
 =================================
 Python-bash-matlab-octave-utils

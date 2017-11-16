@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-req = ['nose','colorama',
-       'binaryornot']
+req = ['nose','colorama','binaryornot']
 # %%
 from setuptools import setup
 
