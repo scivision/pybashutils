@@ -9,11 +9,11 @@ virtualenv testdep     # it's OK if it already exists
 
 pip install pipdeptree[graphviz]
 
-pip install -e .[tests]
+pip install -e .[tests]   # extras_require={'tests':['nose','coveralls']}
 
 python ~/code/pybashutils/pydeptree.py --graph-output svg > dep.svg
 
-python setup.py nosetests --exe
+nosetests --exe
 
 . deactivate
 
