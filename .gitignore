@@ -1,6 +1,41 @@
+*.svg
+testdep/
+
 build/
 dist/
 *.egg-info/
 __pycache__/
 *.pyc
+__pycache__/*
+*.pyd
+*.egg-info
+build/
 
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
