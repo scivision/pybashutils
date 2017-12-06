@@ -38,7 +38,7 @@ This procedure assumes you're on a Linux device
 
 1. install the code::
 
-       pip install -e .
+       python -m pip install -e .
 
 2. add the scripts to your Path::
 
