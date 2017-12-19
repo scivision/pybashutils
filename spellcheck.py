@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 """
 Ctrl \  to abort
-
-For Python >= 3.5
 """
 from subprocess import check_call
 from pathlib import Path
