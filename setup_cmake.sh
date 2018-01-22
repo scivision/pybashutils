@@ -3,7 +3,7 @@ set -e
 
 sudo apt install g++ make libncurses-dev
 
-cver=3.10.1
+cver=3.10.2
 
 wd=/tmp
 wget -nc -P $wd https://cmake.org/files/v${cver:0:4}/cmake-$cver.tar.gz
