@@ -1,7 +1,10 @@
 #!/bin/bash
+# 
+# Compiles and installs CMake
 set -e
 
-sudo apt install g++ make libncurses-dev
+
+[[ $(uname -s) -eq "Linux" ]] && sudo apt install g++ make libncurses-dev
 
 cver=3.11.0
 
