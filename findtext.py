@@ -7,6 +7,8 @@ import colorama
 colorama.init()
 
 MAXSIZE=20e6  #[bytes]
+EXT = ['*.py','*.rst','*.txt','*.pdf','*.md','*.tex','*.f','*.f90','*.for']
+
 
 def findtext(root:Path, txt:str, globext:str, verbose:int) -> None:
     if isinstance(globext,(Path,str)):
@@ -85,7 +87,7 @@ if __name__ == '__main__':
     from argparse import ArgumentParser
     p = ArgumentParser(description='searches for TEXT under DIR and echos back filenames')
     p.add_argument('txt',help='text to search for') #required
-    p.add_argument('globext',help='filename glob',nargs='?',default=['*.py','*.rst','*.txt','*.pdf','*.md','*.tex','*.f','*.f90'])
+    p.add_argument('globext',help='filename glob',nargs='?',default=EXT)
     p.add_argument('dir',help='root dir to search',nargs='?',default='.')
     p.add_argument('-v','--verbose',action='store_true')
     p.add_argument('-q','--quiet',action='store_true')
