@@ -1,6 +1,9 @@
 #!/bin/bash
 # 
 # Compiles and installs CMake
+#
+# Alternatives: linuxbrew (Linux), Homebrew (Mac), Scoop (Windows)
+
 set -e
 
 
