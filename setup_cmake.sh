@@ -9,7 +9,7 @@ set -e
 
 [[ $(uname -s) -eq "Linux" ]] && sudo apt install g++ make libncurses-dev
 
-cver=3.11.0-rc3
+cver=3.11.0
 
 wd=/tmp
 wget -nc -P $wd https://cmake.org/files/v${cver:0:4}/cmake-$cver.tar.gz
