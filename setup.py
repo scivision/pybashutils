@@ -23,4 +23,8 @@ setup(name='pythonutils',
       python_requires='>=3.5',
       tests_require=tests_require,
       extras_require={'tests':tests_require},
+      script=['demo_windows_linux_detect.py', 'diskfree_sigterm.py','findvid.py',
+      'memfree.py','spellcheck.py','DetectOS.py','find_bad_characters.py','getIP.py',
+      'pydeptree.py','tarcp.py','diffdir.py','findtext.py','h5tester.py','whichos.py'],
+
 	  )
