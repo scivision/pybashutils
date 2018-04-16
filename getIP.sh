@@ -2,16 +2,12 @@
 
 # gets public IP address and displays in Terminal
 
-url=('https://ident.me' 'https://api.ipify.org')
+url='https://ident.me'
 
-for u in ${url[@]}; do
-  curl -6 -s -m 2 $u && break
-done
-
-for u in ${url[@]}; do
-  curl -4 -s -m 2 $u && break
-done
-
+curl -6 -s -m 2 $url
+echo
+curl -4 -s -m 2 $url
+echo
 # Note: if you get error message curl: (77) error setting certificate verify locations, it's because curl can't find your certificates. Fix this by:
 #
 # mkdir -p /etc/pki/tls/certs
