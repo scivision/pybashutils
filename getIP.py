@@ -6,6 +6,7 @@ WITH THE CAVEAT that man-in-the-middle, etc. attacks can defeat the reflector me
 
 PyCurl does not have a context manager.
 """
+import logging
 from ipaddress import ip_address
 import pycurl
 from io import BytesIO
@@ -22,7 +23,7 @@ def _public_addr(v, iface:str=None) -> ip_address:
     B = BytesIO()
     C = pycurl.Curl()
 # %% set options    
-    C.setopt(pycurl.TIMEOUT, 1)
+    C.setopt(pycurl.TIMEOUT, 3) # 1 second is too short for slow connections
     if iface:
         C.setopt(pycurl.INTERFACE, iface)
     C.setopt(C.URL, URL)
@@ -34,9 +35,11 @@ def _public_addr(v, iface:str=None) -> ip_address:
         result = B.getvalue()
         try: #validate response
             return ip_address(result.decode('utf8'))
-        except ValueError:
+        except ValueError as e:
+            logging.error(f'could not determine IP address:  {e}')
             return
-    except pycurl.error:
+    except pycurl.error as e:
+        #logging.error(f'could not determine IP address:  {e}')
         return
     finally:   
         C.close()
