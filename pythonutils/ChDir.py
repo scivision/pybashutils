@@ -11,7 +11,7 @@ class ChDir(object):
         self.new_dir = path
 
     def __enter__(self):
-        os.chdir(str(self.new_dir))
+        os.chdir(self.new_dir)
 
     def __exit__(self, *args):
-        os.chdir(str(self.old_dir))
+        os.chdir(self.old_dir)

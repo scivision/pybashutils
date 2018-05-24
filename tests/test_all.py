@@ -19,7 +19,7 @@ def test_ulimit():
     assert hard>=4096
 
 def test_os():
-    from pythonutils.windows_linux_detect.py import Os
+    from pythonutils.windows_linux_detect import Os
     a = []
     for k,v in Os().__dict__.items():
         if v:

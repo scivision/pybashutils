@@ -1,37 +1,39 @@
 #!/bin/bash
 # 
-# Compiles and installs CMake
+# Does NOT use sudo
+#
+# Compiles and installs CMake on Linux (CentOS, Debian, Ubuntu)
 #
 # Alternatives: linuxbrew (Linux), Homebrew (Mac), Scoop (Windows)
+#
+# prereqs
+# CentOS:  yum install gcc-c++ make ncurses-devel
+# Debian/Ubuntu: apt install g++ make libncurses-dev
 
-set -e
+cver=3.11.2
+PREF=$HOME/.local/cmake
 
+set -e # after prereqs
 
-[[ $(uname -s) -eq "Linux" ]] && sudo apt install g++ make libncurses-dev
+# 1. download
+WD=/tmp
+wget -nc -P $WD https://cmake.org/files/v${cver:0:4}/cmake-$cver.tar.gz
 
-cver=3.11.1
-
-wd=/tmp
-wget -nc -P $wd https://cmake.org/files/v${cver:0:4}/cmake-$cver.tar.gz
-
+# 2. build
 (
-cd $wd
+cd $WD
 
 tar -xf cmake-$cver.tar.gz
 
-if [[ $# -ge 1 ]]; then
-    echo "installing cmake to $1"
-    ./cmake-$cver/bootstrap --prefix=$1
-else
-    echo "installing cmake to default location"
-    ./cmake-$cver/bootstrap
-fi
+echo "installing cmake to $PREF"
+./cmake-$cver/bootstrap --prefix=$PREF
 
 make -j2
-
-[[ `make install` ]] && sudo make install
+make install
 )
 
-echo "reopen a new terminal to use CMake $cver"
+echo "----------------------------------------------------"
+echo "please add $PREF/bin to your PATH (in ~/.bashrc)"
+echo "then reopen a new terminal to use CMake $cver"
 
-[[ -z $INSTALL_DIR ]] && echo " you may wish to add $INSTALL_DIR to your PATH"
+
