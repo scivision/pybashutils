@@ -7,7 +7,7 @@ from setuptools import setup,find_packages
 setup(name='pythonutils',
       packages=find_packages(),
       author='Michael Hirsch, Ph.D.',
-      version='0.5.1',
+      version='0.6.0',
       description='Cross-platform utilities for computer maintenance',
       long_description=open('README.rst').read(),
       url='https://github.com/scivison/pybashutils',

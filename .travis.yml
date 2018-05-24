@@ -15,7 +15,7 @@ git:
   depth: 3
 
 
-install: pip -q install -e .[tests]
+install: pip -q install -e .[tests,io]
 
 script: pytest -v
 

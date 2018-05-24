@@ -11,7 +11,7 @@
 =================================
 Python-bash-matlab-octave-utils
 =================================
-Collection of Bash/Python/Matlab/Octave scripts I've made that may be generally useful
+Collection of Bash and Python scripts I've made that may be generally useful
 
 =========       ===========
 function        description
@@ -24,14 +24,14 @@ findtext        find text inside files matching pattern.
 mx              mount network share example using SSHFS
 memfree.m       Estimates available RAM for Matlab/Octave under Windows, Mac, Linux
 checkRAM.m      check if a proposed N-D array with fit in available RAM (w/o swap)
-setup_cmake.sh  setup CMake from source
+setup_cmake.sh  setup latest CMake from source (without sudo)
 =========       ===========
 
 Prereq
 ======
 ::
 
-    apt install libcurl-dev sshfs
+    apt install sshfs g++ libncurses-dev make
 
 
 Install
