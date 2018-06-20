@@ -14,9 +14,11 @@ git:
   depth: 3
 
 
-install: pip -q install -e .[tests,io]
+install: pip install -e .[tests,io]
 
-script: pytest -v
+script: 
+  - pytest -v
+  - flake8
 
 after_success: 
   - if [[ $TRAVIS_PYTHON_VERSION == 3.6* ]]; then
