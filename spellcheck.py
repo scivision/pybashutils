@@ -37,9 +37,9 @@ if __name__ == '__main__':
                    default=['*.rst', '*.txt', '*.md', '*.tex'])
     p.add_argument('rdir', help='root dir to search', nargs='?', default='.')
     p.add_argument('-v', '--verbose', action='store_true')
-    p = p.parse_args()
+    P = p.parse_args()
 
     try:
-        findtext(p.rdir, p.glob)
+        findtext(P.rdir, P.glob)
     except KeyboardInterrupt:
         pass

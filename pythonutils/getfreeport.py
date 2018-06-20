@@ -28,8 +28,8 @@ if __name__ == '__main__':
     p = ArgumentParser()
     p.add_argument('-i', '--iface',
                    help='network interface to use (requires Linux and sudo)')
-    p = p.parse_args()
+    P = p.parse_args()
 
-    port = freeport(p.iface)
+    port = freeport(P.iface)
 
     print(port)

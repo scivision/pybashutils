@@ -1,22 +1,28 @@
 import logging
-from ipaddress import ip_address
+import ipaddress
 import pycurl
 from io import BytesIO
-from typing import List
+from typing import List, Union
 
 length = 45  # http://stackoverflow.com/questions/166132/maximum-length-of-the-textual-representation-of-an-ipv6-address
 
 URL = 'https://ident.me'
 
 
-def getip(url: str=None, iface: str=None) -> List[ip_address]:
+def getip(url: str=None, iface: str=None) -> List[Union[ipaddress.IPv4Address, ipaddress.IPv6Address]]:
     if url is None:
         url = URL
 
-    return [_public_addr(v, url, iface) for v in (pycurl.IPRESOLVE_V4, pycurl.IPRESOLVE_V6)]
+    addrs = []
+    for v in (pycurl.IPRESOLVE_V4, pycurl.IPRESOLVE_V6):
+        addr = _public_addr(v, url, iface)
+        if addr is not None:
+            addrs.append(addr)
+
+    return addrs
 
 
-def _public_addr(v, url: str, iface: str=None) -> ip_address:
+def _public_addr(v, url: str, iface: str=None) -> Union[None, ipaddress.IPv4Address, ipaddress.IPv6Address]:
     B = BytesIO()
     C = pycurl.Curl()
 # %% set options
@@ -31,12 +37,12 @@ def _public_addr(v, url: str, iface: str=None) -> ip_address:
         C.perform()
         result = B.getvalue()
         try:  # validate response
-            return ip_address(result.decode('utf8'))
+            return ipaddress.ip_address(result.decode('utf8'))
         except ValueError as e:
             logging.error(f'could not determine IP address:  {e}')
-            return
+            return None
     except pycurl.error as e:
         # logging.error(f'could not determine IP address:  {e}')
-        return
+        return None
     finally:
         C.close()

@@ -12,11 +12,12 @@ import shutil
 import os
 import signal
 import logging
+from typing import Union
 
 SIG = signal.SIGTERM
 
 
-def diskfree_sigterm(disk: Path, pid: list, freethres: int, verbose: bool=False):
+def diskfree_sigterm(disk: Union[str, Path], pid: list, freethres: int, verbose: bool=False):
 
     def _stop(pid: int):
         if verbose:
@@ -54,11 +55,11 @@ if __name__ == '__main__':
     p.add_argument(
         '-freethres', help='minimum frace free before sigterm', default=0.1, type=float)
     p.add_argument('-v', '--verbose', action='store_true')
-    p = p.parse_args()
+    P = p.parse_args()
 
     try:
-        pid = list(map(int, p.pid))
+        pid = list(map(int, P.pid))
     except ValueError:  # name
-        pid = p.pid
+        pid = P.pid
 
-    diskfree_sigterm(p.disk, pid, p.freethres, p.verbose)
+    diskfree_sigterm(P.disk, pid, P.freethres, P.verbose)

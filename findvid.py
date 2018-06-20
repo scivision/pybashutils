@@ -36,7 +36,7 @@ def findvid_linux(path: Path, verbose: bool=False):
     """
     path = Path(path).expanduser()
 
-    cmd = ['find', path, '-type', 'f',
+    cmd = ['find', str(path), '-type', 'f',
            '-regextype', 'posix-egrep',
            '-iregex', '.*\.(avi|mov|mp4|mpg|mpeg|webm|ogv|mkv|wmv)$']
 
@@ -67,9 +67,9 @@ if __name__ == '__main__':
     p.add_argument('path', help='root path to start recursive search',
                    nargs='?', default='.')
     p.add_argument('-v', '--verbose', action='store_true')
-    p = p.parse_args()
+    P = p.parse_args()
 
     try:
-        findvid_linux(p.path, p.verbose)
-    except IOError:
-        findvid(p.path)
+        findvid_linux(P.path, P.verbose)
+    except OSError:
+        findvid(P.path)

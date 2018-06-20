@@ -35,6 +35,6 @@ if __name__ == '__main__':
         description="tars (optional compression) and moves files per directory")
     p.add_argument('din', help='input directory to recursively tar')
     p.add_argument('fout', help='tar file to write including path')
-    p = p.parse_args()
+    P = p.parse_args()
 
-    tarcp(p.din, p.fout)
+    tarcp(P.din, P.fout)

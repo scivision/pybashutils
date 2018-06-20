@@ -21,8 +21,8 @@ if __name__ == '__main__':
     p.add_argument('iface', help='network interface to use', nargs='?')
     p.add_argument('--url', help='plain text server',
                    default='https://ident.me')
-    p = p.parse_args()
+    P = p.parse_args()
 
-    addr = getip(p.url, p.iface)
+    addr = getip(P.url, P.iface)
     for a in addr:
         print(a)

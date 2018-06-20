@@ -49,6 +49,6 @@ if __name__ == '__main__':
     p.add_argument('path', help='top path to search')
     p.add_argument('ext', help='file extension WITH PERIOD',
                    nargs='?', default='')
-    p = p.parse_args()
+    P = p.parse_args()
 
-    scanbadchar(p.path, p.ext)
+    scanbadchar(P.path, P.ext)
