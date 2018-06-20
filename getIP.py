@@ -15,14 +15,14 @@ from pythonutils.getIP import getip
 if __name__ == '__main__':
     import signal
     signal.signal(signal.SIGINT, signal.SIG_DFL)
-    
+
     from argparse import ArgumentParser
     p = ArgumentParser()
-    p.add_argument('iface',help='network interface to use',nargs='?')
-    p.add_argument('--url',help='plain text server',default='https://ident.me')
+    p.add_argument('iface', help='network interface to use', nargs='?')
+    p.add_argument('--url', help='plain text server',
+                   default='https://ident.me')
     p = p.parse_args()
 
     addr = getip(p.url, p.iface)
     for a in addr:
         print(a)
-

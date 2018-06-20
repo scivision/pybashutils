@@ -1,6 +1,7 @@
 
 from platform import system
 
+
 class Os:
     """
     returns class with properties:
@@ -14,26 +15,26 @@ class Os:
     def __init__(self):
         syst = system().lower()
 
-        #initialize
-        self.cygwin  = False
-        self.wsl     = False
-        self.mac     = False
-        self.linux   = False
+        # initialize
+        self.cygwin = False
+        self.wsl = False
+        self.mac = False
+        self.linux = False
         self.windows = False
-        self.bsd     = False
+        self.bsd = False
 
         if 'cygwin' in syst:
             self.cygwin = True
         elif 'darwin' in syst:
-            self.mac    = True
+            self.mac = True
         elif 'linux' in syst:
-            self.linux  = True
+            self.linux = True
             # detect WSL https://github.com/Microsoft/BashOnWindows/issues/423
-            with open('/proc/version','r') as f:
+            with open('/proc/version', 'r') as f:
                 if 'microsoft' in f.read().lower():
                     self.wsl = True
                     self.linux = False
         elif 'windows' in syst:
-            self.windows= True
+            self.windows = True
         elif 'bsd' in syst:
-            self.bsd    = True
+            self.bsd = True

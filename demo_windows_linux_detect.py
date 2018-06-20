@@ -6,9 +6,9 @@ from pythonutils.windows_linux_detect import Os
 
 winos = Os()
 
-print('Windows',winos.windows)
-print('Cygwin',winos.cygwin)
-print('WSL',winos.wsl)
-print('Linux',winos.linux)
-print('BSD',winos.bsd)
-print('Mac',winos.mac)
+print('Windows', winos.windows)
+print('Cygwin', winos.cygwin)
+print('WSL', winos.wsl)
+print('Linux', winos.linux)
+print('BSD', winos.bsd)
+print('Mac', winos.mac)

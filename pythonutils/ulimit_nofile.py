@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 try:
     import resource as res
-except ImportError: #Windows
+except ImportError:  # Windows
     res = None
+
 
 def raise_nofile(nofile_atleast=4096):
     """
@@ -12,36 +13,38 @@ def raise_nofile(nofile_atleast=4096):
     """
     if res is None:
         return (None,)*2
-#%% (0) what is current ulimit -n setting?
-    soft,ohard = res.getrlimit(res.RLIMIT_NOFILE)
+# %% (0) what is current ulimit -n setting?
+    soft, ohard = res.getrlimit(res.RLIMIT_NOFILE)
     hard = ohard
-#%% (1) increase limit (soft and even hard) if needed
-    if soft<nofile_atleast:
+# %% (1) increase limit (soft and even hard) if needed
+    if soft < nofile_atleast:
         soft = nofile_atleast
 
-        if hard<soft:
+        if hard < soft:
             hard = soft
 
-        print('setting soft & hard ulimit -n {} {}'.format(soft,hard))
+        print('setting soft & hard ulimit -n {} {}'.format(soft, hard))
         try:
-            res.setrlimit(res.RLIMIT_NOFILE,(soft,hard))
-        except (ValueError,res.error):
+            res.setrlimit(res.RLIMIT_NOFILE, (soft, hard))
+        except (ValueError, res.error):
             try:
-               hard = soft
-               print('trouble with max limit, retrying with soft,hard {},{}'.format(soft,hard))
-               res.setrlimit(res.RLIMIT_NOFILE,(soft,hard))
+                hard = soft
+                print(
+                    'trouble with max limit, retrying with soft,hard {},{}'.format(soft, hard))
+                res.setrlimit(res.RLIMIT_NOFILE, (soft, hard))
             except Exception:
-               print('failed to set ulimit, giving up')
-               soft,hard = res.getrlimit(res.RLIMIT_NOFILE)
+                print('failed to set ulimit, giving up')
+                soft, hard = res.getrlimit(res.RLIMIT_NOFILE)
 
-    return soft,hard
+    return soft, hard
 
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
     p = ArgumentParser()
-    p.add_argument('-n','--nofile',help='max number of open files',type=int,default=4096)
+    p.add_argument('-n', '--nofile',
+                   help='max number of open files', type=int, default=4096)
     p = p.parse_args()
 
-    soft,hard = raise_nofile(p.nofile)
-    print('ulimit -n soft,hard: {},{}'.format(soft,hard))
+    soft, hard = raise_nofile(p.nofile)
+    print('ulimit -n soft,hard: {},{}'.format(soft, hard))

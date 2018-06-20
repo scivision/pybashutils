@@ -17,7 +17,8 @@ logging.basicConfig(format='%(asctime)s.%(msecs)03d %(filename)s/%(funcName)s:%(
 
 
 def alwaysfail():
-	logging.warning('is when this event was logged.')
+    logging.warning('is when this event was logged.')
+
 
 if __name__ == '__main__':
-	alwaysfail()
+    alwaysfail()

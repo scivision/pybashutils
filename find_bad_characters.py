@@ -9,12 +9,13 @@ import subprocess
 from pathlib import Path
 
 try:
-    subprocess.check_call(['iconv','--version'])
-    FIX=True
+    subprocess.check_call(['iconv', '--version'])
+    FIX = True
 except Exception as e:
-    FIX=False
+    FIX = False
 
-def scanbadchar(path,ext):
+
+def scanbadchar(path, ext):
     """
     ext: file extension INCLUDING PERIOD
     """
@@ -34,9 +35,10 @@ def scanbadchar(path,ext):
             if FIX:
                 print(f'fixing {f} ')
                 # this returns stderr 1 if characters were bad despite conversion success.
-                ret = subprocess.check_output(['iconv','-c','-f','utf-8','-t','ascii',str(f)],
-                                               timeout=5,universal_newlines=True)
+                ret = subprocess.check_output(['iconv', '-c', '-f', 'utf-8', '-t', 'ascii', str(f)],
+                                              timeout=5, universal_newlines=True)
                 f.write_text(ret)
+
 
 if __name__ == '__main__':
     import signal
@@ -44,8 +46,9 @@ if __name__ == '__main__':
 
     from argparse import ArgumentParser
     p = ArgumentParser()
-    p.add_argument('path',help='top path to search')
-    p.add_argument('ext',help='file extension WITH PERIOD',nargs='?',default='')
+    p.add_argument('path', help='top path to search')
+    p.add_argument('ext', help='file extension WITH PERIOD',
+                   nargs='?', default='')
     p = p.parse_args()
 
-    scanbadchar(p.path,p.ext)
+    scanbadchar(p.path, p.ext)

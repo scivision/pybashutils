@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-install_requires=['colorama','binaryornot']
-tests_require=['pytest','nose','coveralls']
-# %%
-from setuptools import setup,find_packages
+from setuptools import setup, find_packages
+
+install_requires = ['colorama', 'binaryornot']
+tests_require = ['pytest', 'coveralls', 'flake8', 'mypy']
 
 setup(name='pythonutils',
       packages=find_packages(),
@@ -12,20 +12,20 @@ setup(name='pythonutils',
       long_description=open('README.rst').read(),
       url='https://github.com/scivison/pybashutils',
       classifiers=[
-      'Development Status :: 5 - Production/Stable',
-      'Environment :: Console',
-      'Intended Audience :: Information Technology',
-      'Operating System :: OS Independent',
-      'Programming Language :: Python :: 3.6',
-      'Programming Language :: Python :: 3.7',
-      'Topic :: Utilities',
+          'Development Status :: 5 - Production/Stable',
+          'Environment :: Console',
+          'Intended Audience :: Information Technology',
+          'Operating System :: OS Independent',
+          'Programming Language :: Python :: 3.6',
+          'Programming Language :: Python :: 3.7',
+          'Topic :: Utilities',
       ],
       install_requires=install_requires,
       python_requires='>=3.6',
       tests_require=tests_require,
-      extras_require={'tests':tests_require,'io':['pycurl']},
-      scripts=['demo_windows_linux_detect.py', 'diskfree_sigterm.py','findvid.py',
-      'memfree.py','spellcheck.py','DetectOS.py','find_bad_characters.py','getIP.py',
-      'pydeptree.py','tarcp.py','diffdir.py','findtext.py','h5tester.py','whichos.py'],
+      extras_require={'tests': tests_require, 'io': ['pycurl']},
+      scripts=['demo_windows_linux_detect.py', 'diskfree_sigterm.py', 'findvid.py',
+               'memfree.py', 'spellcheck.py', 'DetectOS.py', 'find_bad_characters.py', 'getIP.py',
+               'pydeptree.py', 'tarcp.py', 'diffdir.py', 'findtext.py', 'whichos.py'],
 
-	  )
+      )
