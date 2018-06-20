@@ -19,7 +19,7 @@ install: pip install -e .[tests,io]
 script: 
   - pytest -v
   - flake8
-  - mypy . --ignore-missing-imports
+#  - mypy . --ignore-missing-imports   # need new version of mypy
 
 after_success: 
   - if [[ $TRAVIS_PYTHON_VERSION == 3.6* ]]; then
