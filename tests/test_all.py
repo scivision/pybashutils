@@ -3,20 +3,20 @@ import pytest
 
 
 def test_getip():  # requires pycurl which has been a problem on Travis CI (why?)
-    from pythonutils.getIP import getip
+    from pybashutils.getIP import getip
     addr = getip()
     assert len(addr) > 0
 
 
 def test_getfreeport():
-    from pythonutils.getfreeport import freeport
+    from pybashutils.getfreeport import freeport
 
     port = freeport()
     assert isinstance(port, int)
 
 
 def test_ulimit():
-    from pythonutils.ulimit_nofile import raise_nofile
+    from pybashutils.ulimit_nofile import raise_nofile
 
     soft, hard = raise_nofile(4096)
 
@@ -25,7 +25,7 @@ def test_ulimit():
 
 
 def test_os():
-    from pythonutils.windows_linux_detect import Os
+    from pybashutils.windows_linux_detect import Os
     a = []
     for k, v in Os().__dict__.items():
         if v:

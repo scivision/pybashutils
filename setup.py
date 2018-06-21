@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
+from pathlib import Path
 
 install_requires = ['colorama', 'binaryornot']
 tests_require = ['pytest', 'coveralls', 'flake8', 'mypy']
 
-setup(name='pythonutils',
+scripts = [s.name for s in Path(__file__).parent.glob('*.{sh,py}') if not s.name == 'setup.py']
+
+
+setup(name='pybashutils',
       packages=find_packages(),
       author='Michael Hirsch, Ph.D.',
       version='0.6.0',
@@ -25,8 +29,6 @@ setup(name='pythonutils',
       python_requires='>=3.6',
       tests_require=tests_require,
       extras_require={'tests': tests_require, 'io': ['pycurl']},
-      scripts=['demo_windows_linux_detect.py', 'diskfree_sigterm.py', 'findvid.py',
-               'memfree.py', 'spellcheck.py', 'DetectOS.py', 'find_bad_characters.py', 'getIP.py',
-               'pydeptree.py', 'tarcp.py', 'diffdir.py', 'findtext.py', 'whichos.py'],
+      scripts=scripts,
 
       )

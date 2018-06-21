@@ -9,7 +9,7 @@ PyCurl does not have a context manager.
 https://ident.me  ipv6 and ipv4
 https://api.ipify.org # ipv4 only
 """
-from pythonutils.getIP import getip
+from pybashutils.getIP import getip
 
 
 if __name__ == '__main__':
