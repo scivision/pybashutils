@@ -28,7 +28,7 @@ tar -xf cmake-$cver.tar.gz
 echo "installing cmake to $PREF"
 ./cmake-$cver/bootstrap --prefix=$PREF
 
-make -j2
+make -j -l 2
 make install
 )
 
