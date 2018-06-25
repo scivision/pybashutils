@@ -10,7 +10,7 @@
 # CentOS:  yum install gcc-c++ make ncurses-devel
 # Debian/Ubuntu: apt install g++ make libncurses-dev
 
-cver=3.11.2
+cver=3.12.0-rc1
 PREF=$HOME/.local/cmake
 
 set -e # after prereqs
