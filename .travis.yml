@@ -3,7 +3,7 @@ fast_finish: true
 
 python:
   - 3.6
-  - "3.7-dev"
+  - 3.7-dev
 
 os:
   - linux
@@ -23,6 +23,6 @@ script:
 
 after_success: 
   - if [[ $TRAVIS_PYTHON_VERSION == 3.6* ]]; then
-    coverage run tests/test_all.py;
+    pytest --cov;
     coveralls;
     fi

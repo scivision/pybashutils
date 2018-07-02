@@ -3,4 +3,11 @@
 platform-independent free memory to stdout in bytes
 """
 import psutil
-print(psutil.virtual_memory().available)
+
+
+def main():
+    print(psutil.virtual_memory().available)
+
+
+if __name__ == '__main__':
+    main()

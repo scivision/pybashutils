@@ -32,14 +32,3 @@ def raise_nofile(nofile_atleast=4096):
                 soft, hard = res.getrlimit(res.RLIMIT_NOFILE)
 
     return soft, hard
-
-
-if __name__ == '__main__':
-    from argparse import ArgumentParser
-    p = ArgumentParser()
-    p.add_argument('-n', '--nofile',
-                   help='max number of open files', type=int, default=4096)
-    P = p.parse_args()
-
-    soft, hard = raise_nofile(P.nofile)
-    print(f'ulimit -n soft,hard: {soft},{hard}')

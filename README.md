@@ -12,17 +12,15 @@
 Collection of Bash and Python scripts I've made that may be generally
 useful
 
-  function          description
-  ----------------- -----------------------------------------------------------------------------
-  h5tester.py       test HDF5 files for corruption--if the variable(s) have Fletcher 32 enabled
-  cupd              update conda packages (well, the ones I use)
-  checkIP           Sends you an email automatically if your IP address changes
-  getIP.py          gets your public IP address (not the internal NAT address)
-  findtext          find text inside files matching pattern.
-  mx                mount network share example using SSHFS
-  memfree.m         Estimates available RAM for Matlab/Octave under Windows, Mac, Linux
-  checkRAM.m        check if a proposed N-D array with fit in available RAM (w/o swap)
-  setup\_cmake.sh   setup latest CMake from source (without sudo)
+  function       |   description
+-----------------|-------------------------------------------------------------
+  checkIP        |  Sends you an email automatically if your IP address changes
+  getIP          |  gets your public IP address (not the internal NAT address)
+  findtext       |  find text inside files matching pattern.
+  mx             |  mount network share example using SSHFS
+  memfree        |  Estimates available RAM 
+  setup_cmake.sh |  setup latest CMake from source (without sudo)
+
 
 ## Prereq
 
@@ -31,6 +29,7 @@ useful
 ## Install
 
     python -m pip install -e .
+
 
 ## Usage
 
@@ -48,7 +47,7 @@ useful
 
         mU jdoe
 
-and your network drive is available as \~/U
+and your network drive is available as ~/U
 
 3.  Unmounting the "U" drive. When done for the day, suggest unmounting
     in case to help mitigate security risks:
@@ -60,4 +59,4 @@ drive), `~/U` will stay connected until you close that file(s).
 
 ### Get Public IP address
 
-    getIP.py
+    getIP

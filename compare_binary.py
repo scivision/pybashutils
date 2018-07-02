@@ -4,6 +4,7 @@ compare binary output files
 """
 import filecmp
 from pathlib import Path
+from argparse import ArgumentParser
 
 
 def compbin(dir1: Path, dir2: Path, pat: str):
@@ -18,8 +19,7 @@ def compbin(dir1: Path, dir2: Path, pat: str):
             print('difference:', f.name)
 
 
-if __name__ == '__main__':
-    from argparse import ArgumentParser
+def main():
     p = ArgumentParser()
     p.add_argument(
         'dirs', help='dir1 dir2 to compare files matching pat', nargs=2)
@@ -27,3 +27,7 @@ if __name__ == '__main__':
     P = p.parse_args()
 
     compbin(P.dirs[0], P.dirs[1], P.pat)
+
+
+if __name__ == '__main__':
+    main()

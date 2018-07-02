@@ -5,9 +5,7 @@ recursively find video files based on extension.
 """
 from pathlib import Path
 import subprocess
-
-PURE = True
-# %%
+from argparse import ArgumentParser
 
 
 def findvid(path: Path):
@@ -48,21 +46,20 @@ def findvid_linux(path: Path, verbose: bool=False):
                          stderr=subprocess.DEVNULL,
                          universal_newlines=True)
 
-    returncode = ret.returncode
+    returncode: int = ret.returncode
     if returncode in (0, 1):
         pass
     elif returncode == 2:
-        raise IOError('GNU find error or not found')
+        raise OSError('GNU find error or not found')
     else:
-        raise IOError(returncode)
+        raise OSError(returncode)
 
     vids = ret.stdout.split('\n')
     if vids:
         print('\n'.join(vids), end="")
 
 
-if __name__ == '__main__':
-    from argparse import ArgumentParser
+def main():
     p = ArgumentParser()
     p.add_argument('path', help='root path to start recursive search',
                    nargs='?', default='.')
@@ -73,3 +70,7 @@ if __name__ == '__main__':
         findvid_linux(P.path, P.verbose)
     except OSError:
         findvid(P.path)
+
+
+if __name__ == '__main__':
+    main()

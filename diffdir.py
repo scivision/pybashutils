@@ -4,6 +4,7 @@ Pure Python stdlib directory comparison by filename
 """
 from pathlib import Path
 import filecmp
+from argparse import ArgumentParser
 
 
 def diff_dir(path1: Path, path2: Path):
@@ -23,7 +24,6 @@ def diff_dir(path1: Path, path2: Path):
 
 
 def main():
-    from argparse import ArgumentParser
     p = ArgumentParser()
     p.add_argument('path1', help='first path to compare')
     p.add_argument('path2', help='second path to compare')

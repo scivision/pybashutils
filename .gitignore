@@ -1,3 +1,5 @@
+.coverage
+htmlcov/
 .mypy_cache/
 .pytest_cache/
 .cache/

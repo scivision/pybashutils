@@ -5,6 +5,7 @@ import subprocess
 from binaryornot.check import is_binary
 import colorama
 from typing import List, Union, Iterable
+from argparse import ArgumentParser
 
 colorama.init()
 
@@ -88,11 +89,7 @@ def searchfile(f: Path, txt: str, verbose: int):
     return here, matchinglines
 
 
-if __name__ == '__main__':
-    import signal
-    signal.signal(signal.SIGINT, signal.SIG_DFL)
-
-    from argparse import ArgumentParser
+def main():
     p = ArgumentParser(
         description='searches for TEXT under DIR and echos back filenames')
     p.add_argument('txt', help='text to search for')  # required
@@ -107,3 +104,7 @@ if __name__ == '__main__':
     verbose += P.verbose
 
     findtext(P.dir, P.txt, P.globext, verbose)
+
+
+if __name__ == '__main__':
+    main()

@@ -7,6 +7,7 @@ Michael Hirsch, Ph.D.
 import logging
 import subprocess
 from pathlib import Path
+from argparse import ArgumentParser
 
 try:
     subprocess.check_call(['iconv', '--version'])
@@ -40,15 +41,14 @@ def scanbadchar(path, ext):
                 f.write_text(ret)
 
 
-if __name__ == '__main__':
-    import signal
-    signal.signal(signal.SIGINT, signal.SIG_DFL)
-
-    from argparse import ArgumentParser
+def main():
     p = ArgumentParser()
     p.add_argument('path', help='top path to search')
-    p.add_argument('ext', help='file extension WITH PERIOD',
-                   nargs='?', default='')
+    p.add_argument('ext', help='file extension WITH PERIOD', nargs='?', default='')
     P = p.parse_args()
 
     scanbadchar(P.path, P.ext)
+
+
+if __name__ == '__main__':
+    main()

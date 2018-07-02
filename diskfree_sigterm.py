@@ -13,6 +13,7 @@ import os
 import signal
 import logging
 from typing import Union
+from argparse import ArgumentParser
 
 SIG = signal.SIGTERM
 
@@ -46,8 +47,7 @@ def diskfree_sigterm(disk: Union[str, Path], pid: list, freethres: int, verbose:
         print(f'{disk} free percentage {freerat*100:.1f}')
 
 
-if __name__ == '__main__':
-    from argparse import ArgumentParser
+def main():
     p = ArgumentParser()
     p.add_argument('disk', help='disk path to check')
     p.add_argument(
@@ -63,3 +63,7 @@ if __name__ == '__main__':
         pid = P.pid
 
     diskfree_sigterm(P.disk, pid, P.freethres, P.verbose)
+
+
+if __name__ == '__main__':
+    main()
