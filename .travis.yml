@@ -1,28 +1,29 @@
 language: python
-fast_finish: true
-
-python:
-  - 3.6
-  - 3.7-dev
-
-os:
-  - linux
-
+sudo: required
+dist: xenial
 group: travis_latest
 
 git:
   depth: 3
+  quiet: true
 
+python:
+  - 3.6
+  - 3.7
+
+os:
+  - linux
 
 install: pip install -e .[tests,io]
 
-script: 
-  - pytest -v
+script:
+  - pytest -sv
   - flake8
 #  - mypy . --ignore-missing-imports   # need new version of mypy
 
-after_success: 
+after_success:
   - if [[ $TRAVIS_PYTHON_VERSION == 3.6* ]]; then
     pytest --cov;
     coveralls;
     fi
+
