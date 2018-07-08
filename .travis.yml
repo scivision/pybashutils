@@ -14,7 +14,7 @@ python:
 os:
   - linux
 
-install: pip install -e .[tests,io]
+install: pip install -e .[tests]
 
 script:
   - pytest -sv
