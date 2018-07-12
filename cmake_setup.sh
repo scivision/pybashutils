@@ -26,7 +26,7 @@ cd $WD
 tar -xf cmake-$cver.tar.gz
 
 echo "installing cmake to $PREF"
-./cmake-$cver/bootstrap --prefix=$PREF
+./cmake-$cver/bootstrap --prefix=$PREF --parallel=2 -- -DCMAKE_BUILD_TYPE:STRING=Release 
 
 make -j -l 2
 make install
