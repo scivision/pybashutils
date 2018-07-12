@@ -11,7 +11,7 @@
 # Debian/Ubuntu: apt install g++ make libncurses-dev
 
 cver=3.12.0-rc3
-PREF=$HOME/.local/cmake
+PREF=$HOME/.local
 
 set -e # after prereqs
 
