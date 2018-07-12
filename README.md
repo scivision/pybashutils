@@ -19,7 +19,7 @@ useful
   findtext       |  find text inside files matching pattern.
   mx             |  mount network share example using SSHFS
   memfree        |  Estimates available RAM 
-  setup_cmake.sh |  setup latest CMake from source (without sudo)
+  cmake_setup.sh |  setup latest CMake from source (without sudo)
 
 
 ## Prereq
