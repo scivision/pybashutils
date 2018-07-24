@@ -10,8 +10,13 @@ from argparse import ArgumentParser
 colorama.init()
 
 MAXSIZE = 20e6  # [bytes]
-EXT = ['*.py', '*.rst', '*.txt', '*.pdf',
-       '*.md', '*.tex', '*.f', '*.f90', '*.for']
+EXT = ['*.py', '*.cfg', '*.ini', 
+       '*.txt', '*.pdf',
+       '*.md', '*.rst',
+       '*.tex', 
+       '*.f', '*.f90', '*.for', '*.f95',
+       '*.c', '*.h', '*.cpp', '*.hpp',
+       '*.m']
 
 
 def findtext(root: Path, txt: str, globext: List[str], verbose: int):
