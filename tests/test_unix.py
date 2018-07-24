@@ -3,7 +3,7 @@ import pytest
 try:
     import pybashutils.ulimit as ulimit
 except ImportError:
-    ulimit is None
+    ulimit = None
 
 
 @pytest.mark.skipif(ulimit is None, reason='Unix only')
