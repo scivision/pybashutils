@@ -26,7 +26,7 @@ def findtext(root: Path, txt: str, globext: List[str], verbose: int):
     for ext in globext:
         # in case "ext" is actually a specific filename
         e = Path(ext).expanduser()
-        if e.is_file():
+        if not e.name.startswith('*') and e.is_file():
             searchlist([e], txt, verbose)
         else:  # usual case
             searchlist(Path(root).expanduser().rglob(str(e)), txt, verbose)
