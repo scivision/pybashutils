@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 """requires pycurl which has been a problem on Travis CI (why?)"""
 import pytest
-import os
 try:
     import pycurl
-except (ModuleNotFoundError, ImportError):
+except ImportError:
     pycurl = None
-
-CI = bool(os.environ['CI']) if 'CI' in os.environ else False
 
 
 @pytest.mark.skipif(pycurl is None, reason="PyCurl is optional")
