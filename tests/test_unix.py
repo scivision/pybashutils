@@ -1,10 +1,12 @@
 #!/usr/bin/env python
-import os
-import pybashutils.ulimit as ulimit
 import pytest
+try:
+    import pybashutils.ulimit as ulimit
+except ImportError:
+    ulimit is None
 
 
-@pytest.mark.skipif(os.name == 'nt', reason='Unix only')
+@pytest.mark.skipif(ulimit is None, reason='Unix only')
 def test_ulimit():
     soft, hard = ulimit.raise_nofile(4096)
 

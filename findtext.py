@@ -10,10 +10,10 @@ from argparse import ArgumentParser
 colorama.init()
 
 MAXSIZE = 20e6  # [bytes]
-EXT = ['*.py', '*.cfg', '*.ini', 
+EXT = ['*.py', '*.cfg', '*.ini',
        '*.txt', '*.pdf',
        '*.md', '*.rst',
-       '*.tex', 
+       '*.tex',
        '*.f', '*.f90', '*.for', '*.f95',
        '*.c', '*.h', '*.cpp', '*.hpp',
        '*.m']

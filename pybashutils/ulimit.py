@@ -2,6 +2,7 @@
 from typing import Tuple
 import resource as res
 
+
 def raise_nofile(nofile_atleast: int=4096) -> Tuple[int, int]:
     """
     sets nofile soft limit to at least 4096, useful for running matlplotlib/seaborn on
