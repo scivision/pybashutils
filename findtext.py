@@ -19,7 +19,7 @@ EXT = ['*.py', '*.cfg', '*.ini',
        '*.m']
 
 
-def findtext(root: Path, txt: str, globext: List[str], verbose: int):
+def findtext(root: Path, txt: str, globext: List[str], exclude: List[str], verbose: bool):
     if isinstance(globext, (Path, str)):
         globext = [globext]
 
@@ -27,18 +27,21 @@ def findtext(root: Path, txt: str, globext: List[str], verbose: int):
         # in case "ext" is actually a specific filename
         e = Path(ext).expanduser()
         if not e.name.startswith('*') and e.is_file():
-            searchlist([e], txt, verbose)
+            searchlist([e], txt, exclude, verbose)
         else:  # usual case
-            searchlist(Path(root).expanduser().rglob(str(e)), txt, verbose)
+            searchlist(Path(root).expanduser().rglob(str(e)), txt, exclude, verbose)
 
 
-def searchlist(flist: Union[List[Path], Iterable], txt: str, verbose: int):
+def searchlist(flist: Union[List[Path], Iterable], txt: str, exclude: List[str], verbose: bool):
 
     mat = []
+    exc = set(exclude)
 
-    endl = '\n' if verbose >= 0 else ' '
+    endl = '\n' if verbose else ' '
 
     for f in flist:
+        if exc.intersection(set(str(f.resolve()).split('/'))):
+            continue
         # note that searchfile() does NOT work for PDF even with text inside...but Grep does. Hmm..
         if f.is_file() and f.stat().st_size < MAXSIZE:
             matchinglines = None
@@ -52,7 +55,7 @@ def searchlist(flist: Union[List[Path], Iterable], txt: str, verbose: int):
 
             if here:
                 print(colorama.Back.MAGENTA + str(f), end=endl)
-                if matchinglines and verbose >= 0:
+                if matchinglines:
                     print(colorama.Back.BLACK + '\n'.join(matchinglines))
                 mat.append(f)
 
@@ -71,7 +74,7 @@ def searchbinary(f: Path, txt: str) -> bool:
     return False
 
 
-def searchfile(f: Path, txt: str, verbose: int):
+def searchfile(f: Path, txt: str, verbose: bool):
     here = False
     matchinglines = []
     """
@@ -88,7 +91,7 @@ def searchfile(f: Path, txt: str, verbose: int):
                 matchinglines.append(f'{i}: {l}')
                 here = True
         except UnicodeDecodeError as e:
-            if verbose > 0:
+            if verbose:
                 warnings.warn(f'{f} {e}')
 
     return here, matchinglines
@@ -100,15 +103,12 @@ def main():
     p.add_argument('txt', help='text to search for')  # required
     p.add_argument('globext', help='filename glob', nargs='?', default=EXT)
     p.add_argument('dir', help='root dir to search', nargs='?', default='.')
+    p.add_argument('-e', '--exclude', help='exclude files/dirs', nargs='+', default=('.eggs', 'build/'))
     p.add_argument('-v', '--verbose', action='store_true')
     p.add_argument('-q', '--quiet', action='store_true')
     P = p.parse_args()
 
-    verbose = 0
-    verbose -= P.quiet
-    verbose += P.verbose
-
-    findtext(P.dir, P.txt, P.globext, verbose)
+    findtext(P.dir, P.txt, P.globext, P.exclude, P.verbose)
 
 
 if __name__ == '__main__':
