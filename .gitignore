@@ -1,3 +1,4 @@
+.eggs/
 .coverage
 htmlcov/
 .mypy_cache/
