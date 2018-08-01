@@ -1,13 +1,17 @@
 #!/usr/bin/env python
-import warnings
+import logging
 from pathlib import Path
 import subprocess
 from binaryornot.check import is_binary
-import colorama
-from typing import List, Union, Iterable
+from typing import List, Union, Iterable, Tuple
 from argparse import ArgumentParser
-
-colorama.init()
+try:
+    import colorama
+    MAGENTA = colorama.Back.MAGENTA
+    BLACK = colorama.Back.BLACK
+    colorama.init()
+except ImportError:
+    MAGENTA = BLACK = ''
 
 MAXSIZE = 20e6  # [bytes]
 EXT = ['*.py', '*.cfg', '*.ini',
@@ -23,13 +27,15 @@ def findtext(root: Path, txt: str, globext: List[str], exclude: List[str], verbo
     if isinstance(globext, (Path, str)):
         globext = [globext]
 
+    root = Path(root).expanduser()
+
     for ext in globext:
         # in case "ext" is actually a specific filename
         e = Path(ext).expanduser()
         if not e.name.startswith('*') and e.is_file():
             searchlist([e], txt, exclude, verbose)
         else:  # usual case
-            searchlist(Path(root).expanduser().rglob(str(e)), txt, exclude, verbose)
+            searchlist(root.rglob(str(e)), txt, exclude, verbose)
 
 
 def searchlist(flist: Union[List[Path], Iterable], txt: str, exclude: List[str], verbose: bool):
@@ -37,27 +43,28 @@ def searchlist(flist: Union[List[Path], Iterable], txt: str, exclude: List[str],
     mat = []
     exc = set(exclude)
 
-    endl = '\n' if verbose else ' '
-
     for f in flist:
         if exc.intersection(set(str(f.resolve()).split('/'))):
             continue
         # note that searchfile() does NOT work for PDF even with text inside...but Grep does. Hmm..
         if f.is_file() and f.stat().st_size < MAXSIZE:
-            matchinglines = None
+            matchinglines: List[str] = []
 
             if not is_binary(str(f)):
-                here, matchinglines = searchfile(f, txt, verbose)
+                here, matchinglines = searchfile(f, txt)
             elif f.suffix == '.pdf':
                 here = searchbinary(f, txt)
             else:
+                logging.info(f'skipped {f}')
                 continue
 
             if here:
-                print(colorama.Back.MAGENTA + str(f), end=endl)
-                if matchinglines:
-                    print(colorama.Back.BLACK + '\n'.join(matchinglines))
                 mat.append(f)
+                if verbose:
+                    print(MAGENTA + str(f))
+                    print(BLACK + '\n'.join(matchinglines))
+                else:
+                    print(f)
 
 
 def searchbinary(f: Path, txt: str) -> bool:
@@ -69,12 +76,12 @@ def searchbinary(f: Path, txt: str) -> bool:
     except subprocess.CalledProcessError:  # grep returns 1 if no match
         return False
     except Exception as e:  # catch-all for unexpected error
-        warnings.warn(f'{f}  {e}')
+        logging.warning(f'{f}  {e}')
 
     return False
 
 
-def searchfile(f: Path, txt: str, verbose: bool):
+def searchfile(f: Path, txt: str) -> Tuple[bool, List[str]]:
     here = False
     matchinglines = []
     """
@@ -91,8 +98,7 @@ def searchfile(f: Path, txt: str, verbose: bool):
                 matchinglines.append(f'{i}: {l}')
                 here = True
         except UnicodeDecodeError as e:
-            if verbose:
-                warnings.warn(f'{f} {e}')
+            logging.info(f'{f} {e}')
 
     return here, matchinglines
 
@@ -105,7 +111,6 @@ def main():
     p.add_argument('dir', help='root dir to search', nargs='?', default='.')
     p.add_argument('-e', '--exclude', help='exclude files/dirs', nargs='+', default=('.eggs', 'build/'))
     p.add_argument('-v', '--verbose', action='store_true')
-    p.add_argument('-q', '--quiet', action='store_true')
     P = p.parse_args()
 
     findtext(P.dir, P.txt, P.globext, P.exclude, P.verbose)
