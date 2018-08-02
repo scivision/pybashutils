@@ -11,4 +11,4 @@ def test_findtext():
 
 
 if __name__ == '__main__':
-    pytest.main()
+    pytest.main(['-x', __file__])

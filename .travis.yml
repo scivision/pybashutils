@@ -17,7 +17,7 @@ os:
 install: pip install -e .[tests]
 
 script:
-  - pytest -sv
+  - pytest -rsv
   - flake8
 #  - mypy . --ignore-missing-imports   # need new version of mypy
 
