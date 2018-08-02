@@ -1,4 +1,30 @@
 #!/usr/bin/env python
+"""
+Recursively find files containing text.
+This method is slower than grep, but is cross-platform and easier syntax.
+
+benchmarks:
+
+time findtext xarray
+18.6 sec
+
+# note there are no "" on the command below. It's the equivalent of the defaults for the Python script.
+time grep -r -l \
+  --exclude-dir={\_site,\.git,\.eggs,build,dist,\.mypy_cache,.pytest_cache,*\.egg-info} \
+  --include=*.{py,cfg,ini,txt,pdf,md,rst,tex,f,f90,for,f95,c,h,cpp,hpp,m} \
+  xarray .
+0.55 sec
+
+---
+time findtext xarray "*.py"
+1.14 sec
+
+time grep -r -l \
+  --exclude-dir={\_site,\.git,\.eggs,build,dist,\.mypy_cache,.pytest_cache,*\.egg-info} \
+  --include=*.py  xarray .
+0.15 sec
+
+"""
 import logging
 from pathlib import Path
 import subprocess
@@ -21,21 +47,23 @@ EXT = ['*.py', '*.cfg', '*.ini',
        '*.f', '*.f90', '*.for', '*.f95',
        '*.c', '*.h', '*.cpp', '*.hpp',
        '*.m']
+EXCLUDEDIR = ['_site', '.git', '.eggs', 'build', 'dist', '.mypy_cache', '.pytest_cache']
 
 
-def findtext(root: Path, txt: str, globext: List[str], exclude: List[str], verbose: bool):
-    if isinstance(globext, (Path, str)):
-        globext = [globext]
+def findtext(root: Path, txt: str,
+             globext: Union[str, Path, List[str]],
+             exclude: List[str], verbose: bool):
+    """
+    multiple extensions with braces like Linux does not work in .rglob()
+    """
 
     root = Path(root).expanduser()
 
+    if isinstance(globext, (str, Path)):
+        globext = [str(globext)]
+
     for ext in globext:
-        # in case "ext" is actually a specific filename
-        e = Path(ext).expanduser()
-        if not e.name.startswith('*') and e.is_file():
-            searchlist([e], txt, exclude, verbose)
-        else:  # usual case
-            searchlist(root.rglob(str(e)), txt, exclude, verbose)
+        searchlist(root.rglob(ext), txt, exclude, verbose)
 
 
 def searchlist(flist: Union[List[Path], Iterable], txt: str, exclude: List[str], verbose: bool):
@@ -104,12 +132,11 @@ def searchfile(f: Path, txt: str) -> Tuple[bool, List[str]]:
 
 
 def main():
-    p = ArgumentParser(
-        description='searches for TEXT under DIR and echos back filenames')
+    p = ArgumentParser(description='searches for TEXT under DIR and echos back filenames')
     p.add_argument('txt', help='text to search for')  # required
     p.add_argument('globext', help='filename glob', nargs='?', default=EXT)
     p.add_argument('dir', help='root dir to search', nargs='?', default='.')
-    p.add_argument('-e', '--exclude', help='exclude files/dirs', nargs='+', default=('.eggs', 'build/'))
+    p.add_argument('-e', '--exclude', help='exclude files/dirs', nargs='+', default=EXCLUDEDIR)
     p.add_argument('-v', '--verbose', action='store_true')
     P = p.parse_args()
 
