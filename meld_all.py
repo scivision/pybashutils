@@ -11,6 +11,7 @@ meld_all .appveyor.yml -l Fortran
 from pathlib import Path
 from argparse import ArgumentParser
 import filecmp
+import logging
 import subprocess
 try:
     import ghlinguist as ghl
@@ -29,10 +30,18 @@ def meldloop(root: Path, filename: Path, language: str=LANG, exe: str=EXE):
     # Not using check_call due to spurious errors
     for f in flist:
         if filecmp.cmp(f, filename, shallow=False):
+            print(f'SAME: {f.parent}')
             continue
 
         if ghl is not None:
-            if ghl.linguist(f.parent, rtype=True) != language:
+            langlist = ghl.linguist(f.parent)
+            if langlist is None:
+                logging.warning(f'SKIP: {f.parent}')
+                continue
+
+            thislangs = [l[0] for l in langlist[:2]]
+            if language not in thislangs:
+                print(f'SKIP: {f.parent} {thislangs}')
                 continue
 
         subprocess.run([exe, str(filename), str(f)])
