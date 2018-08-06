@@ -21,15 +21,17 @@ except ImportError:
 EXE = 'meld'
 
 
-def meldloop(root: Path, filename: Path, language: str=None, exe: str=EXE, strict: bool=False):
+def meldloop(root: Path, filename: Path, language: str=None, exe: str=EXE,
+             strict: bool=False, fast: bool=False):
+
     assert root.is_dir(), f'{root} is not a directory'
     assert filename.is_file()
-    
+
     flist = list(root.rglob(filename.name))
-    
+
     si = 1 if strict else 2
-    
-    if language is None:
+
+    if not fast and language is None:
         language = ghl.linguist(filename.parent, rtype=True)
 
     print(f'comparing {len(flist)} files vs {filename} {language}')
@@ -40,7 +42,7 @@ def meldloop(root: Path, filename: Path, language: str=None, exe: str=EXE, stric
             print(f'SAME: {f.parent}')
             continue
 
-        if ghl is not None:
+        if not fast and ghl is not None:
             langlist = ghl.linguist(f.parent)
             if langlist is None:
                 logging.warning(f'SKIP: {f.parent}')
@@ -60,7 +62,9 @@ def main():
     p.add_argument('root', help='top-level directory to search under', nargs='?')
     p.add_argument('-l', '--language', help='language to template')
     p.add_argument('-exe', help='program to compare with', default=EXE)
-    p.add_argument('-s', '--strict', help='compare only with first language match', action='store_true')
+    g = p.add_mutually_exclusive_group()
+    g.add_argument('-s', '--strict', help='compare only with first language match', action='store_true')
+    g.add_argument('-f', '--fast', help='do not check language with Linguist', action='store_true')
     p = p.parse_args()
 
     fn = Path(p.filename).expanduser()
@@ -71,7 +75,7 @@ def main():
     if not root.is_dir():
         raise FileNotFoundError(f'{root} is not a directory')
 
-    meldloop(root, fn, p.language, p.exe, strict=p.strict)
+    meldloop(root, fn, p.language, p.exe, strict=p.strict, fast=p.fast)
 
 
 if __name__ == '__main__':
