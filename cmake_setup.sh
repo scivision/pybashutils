@@ -6,11 +6,13 @@
 #
 # Alternatives: linuxbrew (Linux), Homebrew (Mac), Scoop (Windows)
 #
+# For Windows, simply use the .msi from  https://cmake.org/download/
+#
 # prereqs
 # CentOS:  yum install gcc-c++ make ncurses-devel
 # Debian/Ubuntu: apt install g++ make libncurses-dev
 
-cver=3.12.0
+cver=3.12.1
 PREF=$HOME/.local
 
 set -e # after prereqs
