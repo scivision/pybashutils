@@ -21,6 +21,7 @@ useful
   mx             |  mount network share example using SSHFS
   memfree        |  Estimates available RAM 
   cmake_setup.sh |  setup latest CMake from source (without sudo)
+  doc2pdf        |  convert .doc, .docx, .rtf to PDF using LibreOffice
 
 
 ## Prereq
