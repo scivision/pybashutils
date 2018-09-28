@@ -11,7 +11,7 @@ MAXSIZE = 20e6  # [bytes]
 
 
 def findtext(root: Union[Path, str], globext: List[str], exclude: List[str],
-             verbose: bool=False):
+             verbose: bool = False):
     """finds file to spell check"""
     if isinstance(globext, (Path, str)):
         globext = [globext]
@@ -25,7 +25,7 @@ def findtext(root: Union[Path, str], globext: List[str], exclude: List[str],
             spellchklist(list(Path(root).expanduser().rglob(str(ext))), exclude, verbose)
 
 
-def spellchklist(flist: List[Path], exclude: List[str], verbose: bool=False):
+def spellchklist(flist: List[Path], exclude: List[str], verbose: bool = False):
     """Spell check each file"""
     if verbose:
         print(f'spell checking {flist}')
@@ -34,7 +34,7 @@ def spellchklist(flist: List[Path], exclude: List[str], verbose: bool=False):
         spellchk(f, exclude)
 
 
-def spellchk(f: Path, exclude: List[str]=None):
+def spellchk(f: Path, exclude: List[str] = None):
 
     if exclude is not None:
         for ex in exclude:

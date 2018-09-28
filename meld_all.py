@@ -21,8 +21,8 @@ except ImportError:
 EXE = 'meld'
 
 
-def meldloop(root: Path, filename: Path, language: str=None, exe: str=EXE,
-             strict: bool=False, fast: bool=False):
+def meldloop(root: Path, filename: Path, language: str = None, exe: str = EXE,
+             strict: bool = False, fast: bool = False):
 
     assert root.is_dir(), f'{root} is not a directory'
     assert filename.is_file()

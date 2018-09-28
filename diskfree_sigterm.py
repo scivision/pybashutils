@@ -18,7 +18,7 @@ from argparse import ArgumentParser
 SIG = signal.SIGTERM
 
 
-def diskfree_sigterm(disk: Union[str, Path], pid: list, freethres: int, verbose: bool=False):
+def diskfree_sigterm(disk: Union[str, Path], pid: list, freethres: int, verbose: bool = False):
 
     def _stop(pid: int):
         if verbose:

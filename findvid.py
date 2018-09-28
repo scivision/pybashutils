@@ -28,7 +28,7 @@ def findvid(path: Path):
     print('\r                         \r', end="")
 
 
-def findvid_linux(path: Path, verbose: bool=False):
+def findvid_linux(path: Path, verbose: bool = False):
     """
     recursive file search using GNU find
     """

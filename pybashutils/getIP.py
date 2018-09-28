@@ -9,7 +9,7 @@ length = 45  # http://stackoverflow.com/questions/166132/maximum-length-of-the-t
 URL = 'https://ident.me'
 
 
-def getip(url: str=None, iface: str=None) -> List[Union[ipaddress.IPv4Address, ipaddress.IPv6Address]]:
+def getip(url: str = None, iface: str = None) -> List[Union[ipaddress.IPv4Address, ipaddress.IPv6Address]]:
     if url is None:
         url = URL
 
@@ -22,7 +22,7 @@ def getip(url: str=None, iface: str=None) -> List[Union[ipaddress.IPv4Address, i
     return addrs
 
 
-def _public_addr(v, url: str, iface: str=None) -> Union[None, ipaddress.IPv4Address, ipaddress.IPv6Address]:
+def _public_addr(v, url: str, iface: str = None) -> Union[None, ipaddress.IPv4Address, ipaddress.IPv6Address]:
     B = BytesIO()
     C = pycurl.Curl()
 # %% set options

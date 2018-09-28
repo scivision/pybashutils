@@ -3,7 +3,7 @@ from typing import Tuple
 import resource as res
 
 
-def raise_nofile(nofile_atleast: int=4096) -> Tuple[int, int]:
+def raise_nofile(nofile_atleast: int = 4096) -> Tuple[int, int]:
     """
     sets nofile soft limit to at least 4096, useful for running matlplotlib/seaborn on
     parallel executing plot generators vs. Ubuntu 16.04 default ulimit -n 1024 or OS X El Captian 256
