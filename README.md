@@ -24,6 +24,8 @@ useful
   doc2pdf        |  convert .doc, .docx, .rtf to PDF using LibreOffice
 
 
+SpellCheck has [moved](https://github.com/scivision/recursivespellcheck).
+
 ## Prereq
 
     apt install sshfs g++ libncurses-dev make
