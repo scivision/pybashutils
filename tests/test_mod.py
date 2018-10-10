@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import pytest
 from pybashutils.getfreeport import freeport
-from pybashutils.windows_linux_detect import Os
+from pybashutils.os_detect import Os
 
 
 def test_getfreeport():
@@ -11,11 +11,9 @@ def test_getfreeport():
 
 
 def test_os():
-    a = []
-    for k, v in Os().__dict__.items():
-        if v:
-            a.append(k)
-    assert len(k) > 1
+    os = str(Os())
+
+    assert isinstance(os, str) and len(os) >= 3
 
 
 if __name__ == '__main__':

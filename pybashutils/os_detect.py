@@ -1,5 +1,4 @@
-
-from platform import system
+from platform import system, uname
 
 
 class Os:
@@ -25,16 +24,23 @@ class Os:
 
         if 'cygwin' in syst:
             self.cygwin = True
+            self.os = 'cygwin'
         elif 'darwin' in syst:
             self.mac = True
+            self.os = 'mac'
         elif 'linux' in syst:
             self.linux = True
-            # detect WSL https://github.com/Microsoft/BashOnWindows/issues/423
-            with open('/proc/version', 'r') as f:
-                if 'microsoft' in f.read().lower():
-                    self.wsl = True
-                    self.linux = False
+            self.os = 'linux'
+            if 'Microsoft' in uname().release:
+                self.wsl = True
+                self.linux = False
+                self.os = 'wsl'
         elif 'windows' in syst:
             self.windows = True
+            self.os = 'windows'
         elif 'bsd' in syst:
             self.bsd = True
+            self.os = 'bsd'
+
+    def __str__(self):
+        return self.os

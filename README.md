@@ -4,7 +4,6 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/ujifxcexg2i1bq1u?svg=true)](https://ci.appveyor.com/project/scivision/pybashutils)
 [![Maintainability](https://api.codeclimate.com/v1/badges/530575d7d1a47e7f3fa1/maintainability)](https://codeclimate.com/github/scivision/pybashutils/maintainability)
 [![pypi versions](https://img.shields.io/pypi/pyversions/pybashutils.svg)](https://pypi.python.org/pypi/pybashutils)
-[![pypi format](https://img.shields.io/pypi/format/pybashutils.svg)](https://pypi.python.org/pypi/pybashutils)
 [![PyPi Download stats](http://pepy.tech/badge/pybashutils)](http://pepy.tech/project/pybashutils)
 
 
