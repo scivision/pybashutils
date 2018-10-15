@@ -18,8 +18,7 @@ useful
   getIP          |  gets your public IP address (not the internal NAT address)
   findtext       |  find text inside files matching pattern.
   mx             |  mount network share example using SSHFS
-  memfree        |  Estimates available RAM 
-  cmake_setup.sh |  setup latest CMake from source (without sudo)
+  memfree        |  Estimates available RAM
   doc2pdf        |  convert .doc, .docx, .rtf to PDF using LibreOffice
 
 
