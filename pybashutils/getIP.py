@@ -41,7 +41,7 @@ def _public_addr(v, url: str, iface: str = None) -> Union[None, ipaddress.IPv4Ad
         except ValueError as e:
             logging.error(f'could not determine IP address:  {e}')
             return None
-    except pycurl.error as e:
+    except pycurl.error:
         # logging.error(f'could not determine IP address:  {e}')
         return None
     finally:

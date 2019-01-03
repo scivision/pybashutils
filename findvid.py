@@ -36,7 +36,7 @@ def findvid_linux(path: Path, verbose: bool = False):
 
     cmd = ['find', str(path), '-type', 'f',
            '-regextype', 'posix-egrep',
-           '-iregex', '.*\.(avi|mov|mp4|mpg|mpeg|webm|ogv|mkv|wmv)$']
+           '-iregex', r'.*\.(avi|mov|mp4|mpg|mpeg|webm|ogv|mkv|wmv)$']
 
     if verbose:
         print(' '.join(cmd))

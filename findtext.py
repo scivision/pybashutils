@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""
+r"""
 Recursively find files containing text.
 This method is slower than grep, but is cross-platform and easier syntax.
 
