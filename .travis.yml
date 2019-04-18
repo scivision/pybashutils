@@ -16,7 +16,7 @@ matrix:
     install: pip install -e .[tests,cov]
     script:
     - flake8
-    # - mypy . --ignore-missing-imports  # need new mypy version
+    # - mypy .  # need new mypy version
     after_success:
     - pytest --cov
     - coveralls
