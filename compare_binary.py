@@ -15,7 +15,7 @@ def compbin(dir1: Path, dir2: Path, pat: str):
     fl2 = dir2.glob(pat)
 
     for f, g in zip(fl1, fl2):
-        if not filecmp.cmp(f, g, False):
+        if not filecmp.cmp(f, g, False):  # type: ignore
             print('difference:', f.name)
 
 

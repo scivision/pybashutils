@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # gets public IP address and displays in Terminal
 
@@ -8,6 +8,7 @@ curl -6 -s -m 2 $url
 echo
 curl -4 -s -m 2 $url
 echo
+
 # Note: if you get error message curl: (77) error setting certificate verify locations, it's because curl can't find your certificates. Fix this by:
 #
 # mkdir -p /etc/pki/tls/certs
