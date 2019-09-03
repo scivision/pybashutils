@@ -2,7 +2,7 @@
 
 # Michael Hirsch, Ph.D.
 # sends an email when an IP address change is detected (use with cron)
-# https://scivision.co/get-email-upon-change-of-ip-address/
+# https://scivision.dev/get-email-upon-change-of-ip-address/
 #
 # Note: Most home ISPs block port 25 STMP, you would need to use port 587.
 # Check /var/log/mail.log to see if you're getting blocked from a simple
@@ -24,7 +24,7 @@
 set -u
 emailaddr=$1
 
-CurIP=$(hostname -I | tr -d [:space:]) 
+CurIP=$(hostname -I | tr -d [:space:])
 
 OldIP=$(tr ' ' '\n' < ~/.current_ip) #space to \n for consistency
 
