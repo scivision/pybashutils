@@ -1,13 +1,10 @@
+# Python and Shell utility scripts
+
 [![Zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.1252220.svg)](https://zenodo.org/record/1252220)
 [![Travis-CI](https://travis-ci.org/scivision/pybashutils.svg?branch=master)](https://travis-ci.org/scivision/pybashutils)
-[![Coverage](https://coveralls.io/repos/github/scivision/pybashutils/badge.svg?branch=master)](https://coveralls.io/github/scivision/pybashutils?branch=master)
 [![Build status](https://ci.appveyor.com/api/projects/status/ujifxcexg2i1bq1u?svg=true)](https://ci.appveyor.com/project/scivision/pybashutils)
-[![Maintainability](https://api.codeclimate.com/v1/badges/530575d7d1a47e7f3fa1/maintainability)](https://codeclimate.com/github/scivision/pybashutils/maintainability)
 [![pypi versions](https://img.shields.io/pypi/pyversions/pybashutils.svg)](https://pypi.python.org/pypi/pybashutils)
 [![PyPi Download stats](http://pepy.tech/badge/pybashutils)](http://pepy.tech/project/pybashutils)
-
-
-# Python-bash-matlab-octave-utils
 
 Collection of Bash and Python scripts I've made that may be generally
 useful
@@ -19,18 +16,6 @@ useful
   mx             |  mount network share example using SSHFS
   memfree        |  Estimates available RAM
   doc2pdf        |  convert .doc, .docx, .rtf to PDF using LibreOffice
-
-
-SpellCheck has [moved](https://github.com/scivision/recursivespellcheck).
-
-## Prereq
-
-    apt install sshfs g++ libncurses-dev make
-
-## Install
-
-    python -m pip install -e .
-
 
 ## Usage
 
@@ -60,4 +45,6 @@ drive), `~/U` will stay connected until you close that file(s).
 
 ### Get Public IP address
 
-    getIP
+```sh
+python getIP.py
+```
