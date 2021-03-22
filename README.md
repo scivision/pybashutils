@@ -1,7 +1,6 @@
 # Python and Shell utility scripts
 
 [![Zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.1252220.svg)](https://zenodo.org/record/1252220)
-[![Travis-CI](https://travis-ci.org/scivision/pybashutils.svg?branch=master)](https://travis-ci.org/scivision/pybashutils)
 [![Build status](https://ci.appveyor.com/api/projects/status/ujifxcexg2i1bq1u?svg=true)](https://ci.appveyor.com/project/scivision/pybashutils)
 [![pypi versions](https://img.shields.io/pypi/pyversions/pybashutils.svg)](https://pypi.python.org/pypi/pybashutils)
 [![PyPi Download stats](http://pepy.tech/badge/pybashutils)](http://pepy.tech/project/pybashutils)
