@@ -16,5 +16,5 @@ def test_os():
     assert isinstance(os, str) and len(os) >= 3
 
 
-if __name__ == '__main__':
-    pytest.main(['-x', __file__])
+if __name__ == "__main__":
+    pytest.main(["-x", __file__])

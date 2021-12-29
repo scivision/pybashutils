@@ -4,7 +4,7 @@ import pytest
 
 def test_ulimit():
 
-    ulimit = pytest.importorskip('pybashutils.ulimit')
+    ulimit = pytest.importorskip("pybashutils.ulimit")
 
     soft, hard = ulimit.raise_nofile(4096)
 
@@ -12,5 +12,5 @@ def test_ulimit():
     assert hard >= 4096
 
 
-if __name__ == '__main__':
-    pytest.main(['-x', __file__])
+if __name__ == "__main__":
+    pytest.main(["-x", __file__])

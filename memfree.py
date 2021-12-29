@@ -1,13 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 platform-independent free memory to stdout in bytes
 """
+
 import psutil
 
-
-def main():
-    print(psutil.virtual_memory().available)
-
-
-if __name__ == '__main__':
-    main()
+print(psutil.virtual_memory().available)

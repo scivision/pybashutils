@@ -16,18 +16,17 @@ def compbin(dir1: Path, dir2: Path, pat: str):
 
     for f, g in zip(fl1, fl2):
         if not filecmp.cmp(f, g, False):  # type: ignore
-            print('difference:', f.name)
+            print("difference:", f.name)
 
 
 def main():
     p = ArgumentParser()
-    p.add_argument(
-        'dirs', help='dir1 dir2 to compare files matching pat', nargs=2)
-    p.add_argument('pat', help='filename pattern')
+    p.add_argument("dirs", help="dir1 dir2 to compare files matching pat", nargs=2)
+    p.add_argument("pat", help="filename pattern")
     P = p.parse_args()
 
     compbin(P.dirs[0], P.dirs[1], P.pat)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

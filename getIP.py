@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-try:
-    from urllib.request import urlopen
-except ImportError:
-    from urllib2 import urlopen  # type: ignore
+#!/usr/bin/env python3
+from urllib.request import urlopen
 
-print(urlopen('https://ident.me').read().decode('ascii'))
+print(urlopen("https://ident.me").read().decode("ascii"))
