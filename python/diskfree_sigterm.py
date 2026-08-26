@@ -7,7 +7,6 @@ E.g. use with crontab to check every 10 minutes or hour, stopping a disk-writing
 python diskfree_sigterm.py ~ mylogger
 """
 
-from __future__ import annotations
 from pathlib import Path
 import subprocess
 import shutil

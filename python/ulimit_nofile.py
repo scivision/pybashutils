@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from argparse import ArgumentParser
-import pybashutils.ulimit as ulimit
+import ulimit
 
 
 def main():

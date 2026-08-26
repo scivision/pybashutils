@@ -1,5 +1,5 @@
 #!/bin/bash
-# by Michael Hirsch Jan 2013
+
 set -e #quit on error
 
 i=0
@@ -21,7 +21,7 @@ while [ $i -lt $maxIter ]; do
   # ls -1 (numeral one): list file names only, ONE FILENAME PER LINE
   # wc -l (ell): count lines in console output
   CurrentNumFiles=$( ls -1 $1 | wc -l ) #compute number of files in user-specified directory
-  
+
   #test to see that number of files is increasing!
     if [[ $CurrentNumFiles -gt $PreviousNumFiles ]]; then #good
       	echo -ne  ${green}
@@ -29,8 +29,7 @@ while [ $i -lt $maxIter ]; do
   	    echo -ne ${red}
     fi
    PreviousNumFiles=$CurrentNumFiles
-    
+
   echo -e "$CurrentNumFiles ${normal}files in directory" $1 $(date -u)
   sleep $waitTime
 done
-

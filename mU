@@ -1,5 +1,4 @@
 #!/bin/bash
-# Michael Hirsch
 # for connecting to BU research grid shares
 # requires being on BU network or via VPN
 

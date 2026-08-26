@@ -1,7 +1,6 @@
 # Python and Shell utility scripts
 
 [![Zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.1252220.svg)](https://zenodo.org/record/1252220)
-[![PyPi Download stats](http://pepy.tech/badge/pybashutils)](http://pepy.tech/project/pybashutils)
 
 Collection of Bash and Python scripts I've made that may be generally
 useful
@@ -45,5 +44,5 @@ drive), `~/U` will stay connected until you close that file(s).
 Get Public IP address
 
 ```sh
-python getIP.py
+python3 ./python/getIP.py
 ```

@@ -2,6 +2,7 @@
 """
 Pure Python stdlib directory comparison by filename
 """
+
 from pathlib import Path
 import filecmp
 from argparse import ArgumentParser

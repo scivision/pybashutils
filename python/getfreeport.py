@@ -3,8 +3,8 @@
 This Python script returns a free network port.
 You can optionally, on Linux only and requiring sudo specify the network interface.
 """
-import socket
 
+import socket
 
 # http://stackoverflow.com/questions/8437726/can-python-select-what-network-adapter-when-opening-a-socket
 SO_BINDTODEVICE = 25

@@ -1,10 +1,9 @@
 #!/bin/bash
-#Michael Hirsch
 #
 # compares directory filenames, based on filename only--ignores file contents
 #   since some systems don't have "tree"
 # handles spaces in filenames
-# a lot faster than checking file contents, as a preliminary check of 
+# a lot faster than checking file contents, as a preliminary check of
 #   massive file systems
 #
 # must specify full path: NOT ~ or $HOME

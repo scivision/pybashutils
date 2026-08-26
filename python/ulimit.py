@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
-from __future__ import annotations
-import resource as res
+import sys
 
 
 def raise_nofile(nofile_atleast: int = 4096) -> tuple[int, int]:
@@ -10,6 +9,11 @@ def raise_nofile(nofile_atleast: int = 4096) -> tuple[int, int]:
     parallel executing plot generators vs. Ubuntu 16.04 default ulimit -n 1024 or OS X El Captian 256
     temporary setting extinguishing with Python session.
     """
+    if sys.platform == "win32":
+        raise NotImplementedError("ulimit/resource limits are not available on Windows")
+
+    import resource as res
+
     # %% (0) what is current ulimit -n setting?
     soft, ohard = res.getrlimit(res.RLIMIT_NOFILE)
     hard = ohard
@@ -23,7 +27,7 @@ def raise_nofile(nofile_atleast: int = 4096) -> tuple[int, int]:
         print("setting soft & hard ulimit -n {} {}".format(soft, hard))
         try:
             res.setrlimit(res.RLIMIT_NOFILE, (soft, hard))
-        except (ValueError, res.error):
+        except (ValueError, OSError):
             try:
                 hard = soft
                 print(

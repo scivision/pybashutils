@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Michael Hirsch, Ph.D.
 # sends an email when an IP address change is detected (use with cron)
 # https://scivision.dev/get-email-upon-change-of-ip-address/
 #

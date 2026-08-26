@@ -2,6 +2,7 @@
 """
 compare binary output files
 """
+
 import filecmp
 from pathlib import Path
 from argparse import ArgumentParser

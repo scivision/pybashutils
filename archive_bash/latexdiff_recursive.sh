@@ -1,10 +1,8 @@
 #!/bin/bash
 # Runs latexdiff on every file in a directory
 #
-# Cygwin prereqs: 
+# Cygwin prereqs:
 # texlive-collection-bibtexextra texlive-collection-binextra perl
-#
-# Michael Hirsch
 
 old=$1
 new=$2

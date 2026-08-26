@@ -1,6 +1,6 @@
 #!/bin/bash
-# Michael Hirsch
 # tars, XZ, and moves files per directory
+
 : ${2?example: tarcp ~/inDir /media/outDir}
 
 MainDir=$1
@@ -21,7 +21,7 @@ done
 
 echo "extract with tar xvf --strip-components=1 *.tar to get rid of . dot directories"
 
-# below (actually wasn't) better for 100,000 files per directory since {} + acts like xargs 
+# below (actually wasn't) better for 100,000 files per directory since {} + acts like xargs
 # UPDATE: I have tried code below and it is no faster than tar itself
 #find "$currDir" -type f -name "*" \
 #        -execdir tar --append --file="$currTarOut" --directory="$currDir" {} +

@@ -11,12 +11,10 @@ https://ident.me  ipv6 and ipv4
 https://api.ipify.org # ipv4 only
 """
 
-from __future__ import annotations
 from argparse import ArgumentParser
 import ipaddress
 import pycurl
 from io import BytesIO
-
 
 length = 45  # http://stackoverflow.com/questions/166132/maximum-length-of-the-textual-representation-of-an-ipv6-address
 
@@ -35,7 +33,7 @@ def main():
 
 
 def getip(
-    url: str = None, iface: str = None
+    url: str | None = None, iface: str | None = None
 ) -> list[ipaddress.IPv4Address | ipaddress.IPv6Address]:
     if url is None:
         url = URL
@@ -50,8 +48,8 @@ def getip(
 
 
 def _public_addr(
-    v, url: str, iface: str = None
-) -> ipaddress.IPv4Address | ipaddress.IPv6Address:
+    v, url: str, iface: str | None = None
+) -> ipaddress.IPv4Address | ipaddress.IPv6Address | None:
     B = BytesIO()
     C = pycurl.Curl()
     addr = None

@@ -1,5 +1,4 @@
 #!/bin/bash
-# Michael Hirsch 2013
 # 7zip's files to a directory
 
 : ${2?example: 7zcp ~/inDir /media/outDir}

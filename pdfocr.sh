@@ -1,7 +1,6 @@
 #!/bin/bash
 # converts non-text PDF with OCR
-# Michael Hirsch 2014
-
+#
 # BUGS: won't work right if operating in parallel with two exactly the same filename stems
 
 InputPDF="$1"
